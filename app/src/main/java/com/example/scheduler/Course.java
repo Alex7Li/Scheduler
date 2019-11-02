@@ -8,11 +8,17 @@ public class Course {
     private String informalName;
     private HashSet<String> prereqs;
 
-    public Course(String courseNum){
+    Course(String courseNum){
         this.courseNum = courseNum;
         this.creditHours = 0;
         this.informalName = "";
         this.prereqs = new HashSet<String>();
+    }
+    Course(String courseNum, String informalName, int creditHours, HashSet<String> prereqs){
+        this.courseNum = courseNum;
+        this.informalName = "";
+        this.creditHours = 0;
+        this.prereqs = new HashSet<>();
     }
 
     public String getCourseNum() {
