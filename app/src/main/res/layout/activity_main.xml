@@ -8,7 +8,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
 
@@ -52,7 +52,7 @@
                         android:layout_height="match_parent" >
 
                         <TextView
-                            android:id="@+id/textview"
+                            android:id="@+id/firstSem"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/Autumn"
@@ -71,7 +71,7 @@
                         android:layout_height="match_parent" >
 
                         <TextView
-                            android:id="@+id/textView18"
+                            android:id="@+id/firstClass"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/AUClass" />
@@ -210,8 +210,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
-<!--        app:popupTheme="@style/AppTheme.PopupOverlay"-->
+            tools:layout_editor_absoluteX="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

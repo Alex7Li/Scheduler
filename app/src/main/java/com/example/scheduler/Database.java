@@ -1,28 +1,44 @@
 package com.example.scheduler;
 
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class Database {
     private DatabaseReference db;
     private List<Course> courses;
+
     public Database(){
         db = FirebaseDatabase.getInstance().getReference();
     }
-    protected void addCourse() {
+    protected void addCourse(Course c) {
         DatabaseReference courses = db.child("Courses");
-        Course c = new Course("CSE1113", "Programming for Nerds", 3, new HashSet<String>());
         DatabaseReference coursesChild = courses.push();
         coursesChild.setValue(c);
     }
+
+    /*
+        Get a course by course number, if it's not in the database, return null.
+     */
+    protected Course getCourseByNumber(String courseNum){
+        getCourseList();
+        for (Course c:courses) {
+            if(c.getCourseNum().equals(courseNum)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /*
+    ArrayList<String> preReqs = new ArrayList<String>();
+        preReqs.add("CSE 1111");
+        preReqs.add("CSE 1112");
+    Course c = new Course("CSE1113", "Programming for Nerds", 3, preReqs);*/
 
     protected void getCourseList() {
         DatabaseReference courses = db.child("Courses") ;
@@ -51,12 +67,8 @@ public class Database {
              String courseNum = courseInfo.getCourseNum();
              int creditHours = courseInfo.getcreditHours();
              String informalName = courseInfo.getinformalName();
-             List<String> prereqs = courseInfo.getPrereqs();
 
-             Course newCourse = new Course(courseNum, informalName, creditHours, prereqs);
-
-
-             this.courses.add(newCourse);
+             this.courses.add(courseInfo);
         }
     }
 }
