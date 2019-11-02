@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
     private Button switchActBtn;
     private FloatingActionButton john;
-    public Map<String, String[]> classNameAndCredit = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
