@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,8 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class AddCourse extends AppCompatActivity {
     private static final String TAG = AddCourse.class.getName();
@@ -46,17 +46,37 @@ public class AddCourse extends AppCompatActivity {
         AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.addCourseName);
         actv.setAdapter(adapter);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+//        FloatingActionButton fab = findViewById(R.id.toJohnAct);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getCourseList();
+//                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                //       .setAction("Action", null).show();
+//
+//            }
+//        });
+
+        Button switchActBtn = (Button) findViewById(R.id.addCourse);
+
+        switchActBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getCourseList();
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //       .setAction("Action", null).show();
-
+                System.out.println("");
             }
         });
+
+        TextView firstClass = findViewById(R.id.firstClass);
+        TextView firstSem = findViewById(R.id.firstSem);
+
+//        for (Map.Entry<String, String[]> entry : classNameAndCredit.entrySet()) {
+//            firstSem.setText(entry.getKey());
+//            firstClass.setText(entry.getValue()[0] + "      " + entry.getValue()[1]);
+//        }
+
+
     }
+
 
     protected void getCourseList() {
         DatabaseReference courses = db.child("Courses");

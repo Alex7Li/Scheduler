@@ -49,6 +49,7 @@ public class Database {
                 //Get map of users in datasnapshot
                 System.out.println(dataSnapshot.getKey());
                 System.out.println(dataSnapshot.getValue());
+                getListOfCourses(dataSnapshot);
             }
 
             @Override
@@ -58,5 +59,17 @@ public class Database {
             }
         };
         courses.addListenerForSingleValueEvent(dataReader);
+    }
+
+    protected void getListOfCourses(DataSnapshot dataSnapshot) {
+
+        for(DataSnapshot ds : dataSnapshot.getChildren()){
+             Course courseInfo = ds.getValue(Course.class);
+             String courseNum = courseInfo.getCourseNum();
+             int creditHours = courseInfo.getcreditHours();
+             String informalName = courseInfo.getinformalName();
+
+             this.courses.add(courseInfo);
+        }
     }
 }

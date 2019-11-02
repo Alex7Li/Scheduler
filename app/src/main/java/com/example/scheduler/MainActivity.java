@@ -11,17 +11,19 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
+    private Button switchActBtn;
+    private FloatingActionButton john;
+    public Map<String, String[]> classNameAndCredit = new HashMap<>();
 
-    public void changeOnClick(View v){
-        startActivity(new Intent(MainActivity.this, AddCourse.class));
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,35 +31,21 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Map<String, String[]> classNameAndCredit = new HashMap<>();
+        john = findViewById(R.id.toJohnAct);
 
-        Button fab = findViewById(R.id.addCourse);
-        fab.setOnClickListener(new View.OnClickListener() {
+        john.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView courseName = findViewById(R.id.addCourseName);
-                TextView courseTerm = findViewById(R.id.courseTerm);
-                TextView credit = findViewById(R.id.courseCredits);
-
-                String[] x = new String[2];
-                x[0] = courseName.getText().toString();
-                x[1] = credit.getText().toString();
-
-                classNameAndCredit.put(courseTerm.getText().toString(), x);
-
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
+                openActivity2();
             }
         });
 
-        TextView firstClass = findViewById(R.id.firstClass);
-        TextView firstSem = findViewById(R.id.firstSem);
 
-        for (Map.Entry<String, String[]> entry : classNameAndCredit.entrySet()) {
-            firstSem.setText(entry.getKey());
-            firstClass.setText(entry.getValue()[0] + "      " + entry.getValue()[1]);
-        }
+    }
 
+    public void openActivity2() {
+        Intent intent = new Intent(MainActivity.this, AddCourse.class);
+        startActivity(intent);
     }
 
     @Override
