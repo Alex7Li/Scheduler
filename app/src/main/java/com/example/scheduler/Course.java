@@ -20,6 +20,13 @@ public class Course {
         this.prereqs = new ArrayList<>();
     }
 
+    Course(){
+        this.courseNum = "";
+        this.creditHours = 0;
+        this.informalName = "";
+        this.prereqs = new ArrayList<>();
+    }
+
     Course(String courseNum, String informalName, int creditHours, List<List<String>> prereqs){
         this.courseNum = courseNum;
         this.informalName = informalName;
