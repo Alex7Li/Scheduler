@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Scheduler</string>
     <string name="title_activity_add_course">AddCourse</string>
+    <string name="action_settings">Settings</string>
 
     <string name="Test">test</string>
     <string name="CourseNameHint">ex. CSE 2221</string>
