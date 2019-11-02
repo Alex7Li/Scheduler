@@ -1,53 +1,79 @@
 package com.example.scheduler;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
-    private static final String TAG = MainActivity.class.getName();
 
+    public void changeOnClick(View v){
+        startActivity(new Intent(MainActivity.this, AddCourse.class));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         db = FirebaseDatabase.getInstance().getReference();
-        getCourseList();
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeOnClick(view);
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+            }
+        });
+
+
+
+        //TextView seasonRow = (TextView) findViewById(R.id.seasonRow);
+
+        //seasonRow.setText("Autumn                         Spring");
+
+        //TextView creditsTaken = (TextView) findViewById(R.id.creditsTaken);
+
+        //int creditAU = 17, creditSP = 16;
+
+        //creditsTaken.setText("Credits: " + creditAU + "Credits: " + creditSP);
     }
 
-    protected void getCourseList() {
-        DatabaseReference courses = db.child("Courses") ;
-        ValueEventListener dataReader = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Get map of users in datasnapshot
-                Log.d(TAG, "GOod");
-                System.out.println(dataSnapshot.getKey());
-                System.out.println(dataSnapshot.getValue());
-            }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //handle databaseError
-                System.out.println("UH OH");
-            }
-        };
-        courses.getDatabase();
-        Log.d(TAG, "Test");
-        //FirebaseDatabase.getInstance().getReference().child("hello").addValueEventListener();
-        courses.addValueEventListener(dataReader);
-        //courses.addListenerForSingleValueEvent(dataReader);
-        //courses.setValue("Hello");
-        //dataReader.
-        //db.push("Test");
-        //db.setValue("Something");
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Scheduler</string>
+    <string name="title_activity_add_course">AddCourse</string>
+
+    <string name="Test">test</string>
+    <string name="CourseNameHint">ex. CSE 2221</string>
+    <string name="AddCourseLabel">add course</string>
+    <string name="CourseTermHint">ex. AU19</string>
+
+    <string name="Autumn">AU</string>
+    <string name="Spring">SP</string>
+
+    <string name="AUClass">AU Class</string>
+    <string name="SPClass">SP Class</string>
+
+    <string name="AUCredit">AU Credit</string>
+    <string name="SPCredit">SP Credit</string>
+
 </resources>
+
