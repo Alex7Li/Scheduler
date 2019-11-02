@@ -12,9 +12,10 @@ public class Database {
     private DatabaseReference db;
     private List<Course> courses;
 
-    public Database(){
+    public Database() {
         db = FirebaseDatabase.getInstance().getReference();
     }
+
     protected void addCourse(Course c) {
         DatabaseReference courses = db.child("Courses");
         DatabaseReference coursesChild = courses.push();
@@ -22,12 +23,12 @@ public class Database {
     }
 
     /*
-        Get a course by course number, if it's not in the database, return null.
-     */
-    protected Course getCourseByNumber(String courseNum){
+       Get a course by course number, if it's not in the database, return null.
+    */
+    protected Course getCourseByNumber(String courseNum) {
         getCourseList();
-        for (Course c:courses) {
-            if(c.getCourseNum().equals(courseNum)){
+        for (Course c : courses) {
+            if (c.getCourseNum().equals(courseNum)) {
                 return c;
             }
         }
@@ -38,17 +39,17 @@ public class Database {
     ArrayList<String> preReqs = new ArrayList<String>();
         preReqs.add("CSE 1111");
         preReqs.add("CSE 1112");
-    Course c = new Course("CSE1113", "Programming for Nerds", 3, preReqs);*/
-
-    protected void getCourseList() {
-        DatabaseReference courses = db.child("Courses") ;
+    Course c = new Course("CSE1113", "Programming for Nerds", 3, preReqs);
+    */
+    protected List<Course> getCourseList() {
+        DatabaseReference courseRef = db.child("Courses");
         ValueEventListener dataReader = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Get map of users in datasnapshot
                 System.out.println(dataSnapshot.getKey());
                 System.out.println(dataSnapshot.getValue());
-                getListOfCourses(dataSnapshot);
+                getListOfCoursesFromDatabase(dataSnapshot);
             }
 
             @Override
@@ -57,17 +58,20 @@ public class Database {
                 System.out.println("UH OH");
             }
         };
-        courses.addListenerForSingleValueEvent(dataReader);
+        courseRef.addListenerForSingleValueEvent(dataReader);
+        return courses;
     }
 
-    protected void getListOfCourses(DataSnapshot dataSnapshot) {
-
+    protected void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
         for(DataSnapshot ds : dataSnapshot.getChildren()){
              Course courseInfo = ds.getValue(Course.class);
+
              String courseNum = courseInfo.getCourseNum();
              int creditHours = courseInfo.getcreditHours();
              String informalName = courseInfo.getinformalName();
+             List<List<String>> prereqs = courseInfo.getPrereqs();
 
+             Course newCourse = new Course(courseNum, informalName, creditHours, prereqs);
              this.courses.add(courseInfo);
         }
     }

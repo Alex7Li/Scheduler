@@ -1,7 +1,6 @@
 package com.example.scheduler;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+<<<<<<< HEAD
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,13 +20,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 5ba7282f343bde226a63f664bc8cd4a4151bb32c
 
 public class AddCourse extends AppCompatActivity {
-    private DatabaseReference db;
     private static final String TAG = AddCourse.class.getName();
 
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
+    // get the valid tags for a course
+    protected List<String> validTags(){
+        Database d = new Database();
+        List<String> courseIDs = new ArrayList<>();
+        for(Course c: d.getCourseList()){
+            courseIDs.add(c.getCourseNum());
+        }
+        return courseIDs;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +46,6 @@ public class AddCourse extends AppCompatActivity {
         setContentView(R.layout.activity_add_course);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        db = FirebaseDatabase.getInstance().getReference();
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.select_dialog_item, fruits);
         AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.addCourseName);
@@ -79,6 +89,7 @@ public class AddCourse extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD
 
 
     protected void getCourseList() {
@@ -107,4 +118,6 @@ public class AddCourse extends AppCompatActivity {
         //db.push("Test");
         //db.setValue("Something");
     }
+=======
+>>>>>>> 5ba7282f343bde226a63f664bc8cd4a4151bb32c
 }
