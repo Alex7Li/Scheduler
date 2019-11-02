@@ -16,12 +16,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class AddCourse extends AppCompatActivity {
-    private DatabaseReference db;
     private static final String TAG = AddCourse.class.getName();
 
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
+    // don't touch in progress
+    protected void validTags(){
+        Database d = new Database();
+        //d.getCourseList();
+        //ArrayList<String> preReqs = new ArrayList<String>();
+        //preReqs.add("CSE 1111");
+        //preReqs.add("CSE 1112");
+        //Course c = new Course("CSE1113", "Programming for Nerds", 3, preReqs);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
