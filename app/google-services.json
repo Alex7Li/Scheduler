@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "344538996332",
+    "firebase_url": "https://scheduleoptimizer-4a688.firebaseio.com",
+    "project_id": "scheduleoptimizer-4a688",
+    "storage_bucket": "scheduleoptimizer-4a688.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344538996332:android:3ba8b693208f6aafe84249",
+        "android_client_info": {
+          "package_name": "com.example.scheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344538996332-bpgtp5ik2gjs16t3aegp6r4baojhsijo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAagGDQB-AOQ9ISX-wl8Ih4XcFJRmVnHEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344538996332-bpgtp5ik2gjs16t3aegp6r4baojhsijo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
