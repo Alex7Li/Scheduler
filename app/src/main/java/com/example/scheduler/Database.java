@@ -17,10 +17,13 @@ public class Database {
     public Database(){
         db = FirebaseDatabase.getInstance().getReference();
     }
-    protected void addCourse(){
+    protected void addCourse() {
         DatabaseReference courses = db.child("Courses");
-        Course c = new Course("CSE1111", "Programming for Nerds",3,new HashSet<String>());
-        courses.child("CSE1111").setValue(c);
+        Course c = new Course("CSE1113", "Programming for Nerds", 3, new HashSet<String>());
+        DatabaseReference coursesChild = courses.push();
+        coursesChild.setValue(c);
+
+        //courses.SetValueAsync(c);
     }
 
     protected void getCourseList() {
@@ -39,8 +42,6 @@ public class Database {
                 System.out.println("UH OH");
             }
         };
-//        courses.getDatabase();
-        //courses.addValueEventListener(dataReader);
         courses.addListenerForSingleValueEvent(dataReader);
     }
 }

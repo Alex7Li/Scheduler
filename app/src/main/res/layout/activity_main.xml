@@ -8,7 +8,11 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content"
+=======
+        android:layout_height="wrap_content">
+>>>>>>> 77da0a6d0e2a56c6fc803dfd5dd260364c602591
         android:theme="@style/AppTheme.AppBarOverlay">
 
 
