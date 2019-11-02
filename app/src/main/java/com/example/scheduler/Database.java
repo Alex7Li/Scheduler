@@ -41,8 +41,8 @@ public class Database {
         preReqs.add("CSE 1112");
     Course c = new Course("CSE1113", "Programming for Nerds", 3, preReqs);
     */
-    protected void getCourseList() {
-        DatabaseReference courses = db.child("Courses");
+    protected List<Course> getCourseList() {
+        DatabaseReference courseRef = db.child("Courses");
         ValueEventListener dataReader = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,11 +58,11 @@ public class Database {
                 System.out.println("UH OH");
             }
         };
-        courses.addListenerForSingleValueEvent(dataReader);
+        courseRef.addListenerForSingleValueEvent(dataReader);
+        return courses;
     }
 
     protected void getListOfCourses(DataSnapshot dataSnapshot) {
-
         for(DataSnapshot ds : dataSnapshot.getChildren()){
              Course courseInfo = ds.getValue(Course.class);
              String courseNum = courseInfo.getCourseNum();
