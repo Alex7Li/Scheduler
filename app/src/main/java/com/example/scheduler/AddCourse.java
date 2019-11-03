@@ -51,10 +51,6 @@ public class AddCourse extends AppCompatActivity {
         AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.addCourseName);
         actv.setAdapter(adapter);
 
-<<<<<<< HEAD
-=======
-        Button addCourseBtn = (Button) findViewById(R.id.addCourse);
->>>>>>> c2d65a48dafd49a39e716d39632b2af7d5e95240
         TextView addCourseName = findViewById(R.id.addCourseName);
         TextView addCredit = findViewById(R.id.addCourseCredits);
         TextView addTerm = findViewById(R.id.courseTerm);
@@ -63,24 +59,13 @@ public class AddCourse extends AppCompatActivity {
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
-                String courseName = addCourseName.getText().toString();
-                String creditName = addCredit.getText().toString();
-                String termYear = addTerm.getText().toString();
-=======
-                // add to course to the database
                 addCourse();
                 String[] x = new String[2];
                 x[0] = addCourseName.getText().toString();
                 x[1] = addCredit.getText().toString();
->>>>>>> c2d65a48dafd49a39e716d39632b2af7d5e95240
+                String termYear = addTerm.getText().toString();
 
             }
         });
-<<<<<<< HEAD
-
-
-=======
->>>>>>> c2d65a48dafd49a39e716d39632b2af7d5e95240
     }
 }
