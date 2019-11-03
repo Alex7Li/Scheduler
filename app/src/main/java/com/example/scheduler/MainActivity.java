@@ -22,13 +22,13 @@ public class MainActivity extends AppCompatActivity {
     private Button switchActBtn;
     private FloatingActionButton addCourseFloatBtn;
     AccountAccessor accountAccessor;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Bundle b = getIntent().getExtras();
-        String name;
         if(b!=null) {
             name = b.getString("name");
         }else{
@@ -73,11 +73,6 @@ public class MainActivity extends AppCompatActivity {
         classNamesAndCredit[6] = findViewById(R.id.AUclass4);
         classNamesAndCredit[7] = findViewById(R.id.SPclass4);
 
-        classNamesAndCredit[0].append("Credit");
-        classNamesAndCredit[0].append("\n");
-        classNamesAndCredit[0].append("Credit");
-        classNamesAndCredit[0].append("\n");
-
 //        AccountAccessor accountAccessor = new AccountAccessor("john");
 //        Map<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
 //
@@ -102,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
      * Starts activity with MainActivity.this as intent
      */
     public void openActivity2() {
+        //send account name from main activity to addCourse
+        accountAccessor = new AccountAccessor(name.toLowerCase(), AddCourse.class);
         Intent intent = new Intent(MainActivity.this, AddCourse.class);
         startActivity(intent);
     }

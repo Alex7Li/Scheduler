@@ -28,10 +28,11 @@
 
         <TextView
             android:id="@+id/welcomeInfo"
-            android:layout_width="332dp"
-            android:layout_height="38dp"
+            android:layout_width="341dp"
+            android:layout_height="57dp"
             android:text="@string/WelcomeInfo"
-            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
