@@ -82,6 +82,7 @@ public class AccountAccessor {
         if(ma!=null) {
             ma.display();
         }
+        ma = null;
         updateCourseList();
     }
 
@@ -129,7 +130,7 @@ public class AccountAccessor {
             for (DataSnapshot ds : dataSnapshot.getChildren()) {
                 if (ds.getKey().equals("StartYear")) {
                     try {
-                        this.startYear = Integer.parseInt(dataSnapshot.getValue().toString());
+                        this.startYear = Integer.parseInt(ds.getValue().toString());
                     } catch (NumberFormatException e) {
                         System.out.println("Error Account accessor");
                         this.startYear = 42;
