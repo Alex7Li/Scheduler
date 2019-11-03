@@ -8,7 +8,6 @@
     <string name="CourseTitleHint">ex. Software I</string>
     <string name="CourseCreditHint">ex. 4</string>
     <string name="CoursePrereqsHint">we will do this EVENTUALLY</string>
-
     <string name="AddCourseLabel">add course</string>
     <string name="CourseTermHint">ex. AU19</string>
 

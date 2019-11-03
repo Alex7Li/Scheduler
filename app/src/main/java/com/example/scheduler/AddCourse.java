@@ -1,7 +1,6 @@
 package com.example.scheduler;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -11,17 +10,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 public class AddCourse extends AppCompatActivity {
     private static final String TAG = AddCourse.class.getName();
@@ -29,13 +22,22 @@ public class AddCourse extends AppCompatActivity {
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
     // get the valid tags for a course
-    protected List<String> validTags(){
-        Database d = new Database();
+    protected List<String> validTags() {
+        DatabaseAccessor d = new DatabaseAccessor();
         List<String> courseIDs = new ArrayList<>();
-        for(Course c: d.getCourseList()){
+        for (Course c : d.getCourseList()) {
             courseIDs.add(c.getCourseNum());
         }
         return courseIDs;
+    }
+
+    protected void addCourse() {
+        String courseNum = ((TextView) findViewById(R.id.addCourseTitle)).getText().toString();
+        ;
+        int creditHours = Integer.parseInt(((TextView) findViewById(R.id.addCourseCredits)).getText().toString());
+        String informalName = ((TextView) findViewById(R.id.addCourseName)).getText().toString();
+        List<List<String>> prereqs = new ArrayList<>();
+        new DatabaseAccessor().addCourse(new Course(courseNum, informalName, creditHours, prereqs));
     }
 
     @Override
@@ -48,14 +50,6 @@ public class AddCourse extends AppCompatActivity {
                 (this, android.R.layout.select_dialog_item, fruits);
         AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.addCourseName);
         actv.setAdapter(adapter);
-
-//        Button fab = findViewById(R.id.addCourse);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getCourseList();
-//            }
-//        });
 
         Button addCourseBtn = (Button) findViewById(R.id.addCourse);
         TextView addCourseName = findViewById(R.id.addCourseName);
@@ -71,6 +65,8 @@ public class AddCourse extends AppCompatActivity {
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // add to course to the database
+                addCourse();
                 String[] x = new String[2];
                 x[0] = addCourseName.getText().toString();
                 x[1] = addCredit.getText().toString();
@@ -79,31 +75,4 @@ public class AddCourse extends AppCompatActivity {
             }
         });
     }
-
-
-//    protected void getCourseList() {
-//        DatabaseReference courses = db.child("Courses");
-//        ValueEventListener dataReader = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                //Get map of users in datasnapshot
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d(TAG, "GOod");
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                //handle databaseError
-//                System.out.println("UH OH");
-//            }
-//        };
-//        courses.getDatabase();
-//        Log.d(TAG, "Test");
-//        //FirebaseDatabase.getInstance().getReference().child("hello").addValueEventListener();
-//        courses.addValueEventListener(dataReader);
-//        //courses.addListenerForSingleValueEvent(dataReader);
-//        //courses.setValue("Hello");
-//        // dataReader.
-//        //db.push("Test");
-//        //db.setValue("Something");
 }
