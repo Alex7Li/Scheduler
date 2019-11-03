@@ -6,14 +6,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseAccessor {
     private DatabaseReference db;
     private List<Course> courses;
+    private boolean updated;
 
     DatabaseAccessor() {
         db = FirebaseDatabase.getInstance().getReference();
+        updateCourseList();
     }
 
     /*
@@ -23,14 +26,13 @@ public class DatabaseAccessor {
         DatabaseReference courses = db.child("Courses");
         DatabaseReference coursesChild = courses.push();
         coursesChild.setValue(c);
+        updateCourseList();
     }
-
 
     /*
        Get a course by course number, if it's not in the database, return null.
     */
     protected Course getCourseByNumber(String courseNum) {
-        getCourseList();
         for (Course c : courses) {
             if (c.getCourseNum().equals(courseNum)) {
                 return c;
@@ -39,15 +41,15 @@ public class DatabaseAccessor {
         return null;
     }
 
-    protected List<Course> getCourseList() {
+    protected List<Course> updateCourseList() {
+        updated = false;
         DatabaseReference courseRef = db.child("Courses");
         ValueEventListener dataReader = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Get map of users in datasnapshot
-                System.out.println(dataSnapshot.getKey());
-                System.out.println(dataSnapshot.getValue());
                 getListOfCoursesFromDatabase(dataSnapshot);
+                updated = true;
             }
 
             @Override
@@ -57,11 +59,19 @@ public class DatabaseAccessor {
             }
         };
         courseRef.addListenerForSingleValueEvent(dataReader);
+        // wait till the database is updated
+//        while(!updated){
+//            try {
+//                Thread.sleep(100);
+//            } catch(InterruptedException ignored) {
+//            }
+//        }
         return courses;
     }
 
 
     protected void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
+        courses = new ArrayList<>();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
              Course courseInfo = ds.getValue(Course.class);
 
@@ -71,7 +81,7 @@ public class DatabaseAccessor {
              List<List<String>> prereqs = courseInfo.getPrereqs();
 
              Course newCourse = new Course(courseNum, informalName, creditHours, prereqs);
-             this.courses.add(courseInfo);
+             this.courses.add(newCourse);
         }
     }
 }
