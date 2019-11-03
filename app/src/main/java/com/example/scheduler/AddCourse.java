@@ -1,7 +1,6 @@
 package com.example.scheduler;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -11,15 +10,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,61 +39,21 @@ public class AddCourse extends AppCompatActivity {
         AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.addCourseName);
         actv.setAdapter(adapter);
 
-//        Button fab = findViewById(R.id.addCourse);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getCourseList();
-//            }
-//        });
-
-        Button addCourseBtn = (Button) findViewById(R.id.addCourse);
         TextView addCourseName = findViewById(R.id.addCourseName);
         TextView addCredit = findViewById(R.id.addCourseCredits);
         TextView addTerm = findViewById(R.id.courseTerm);
 
-
-        TextView firstClass = findViewById(R.id.firstClass);
-        TextView firstSem = findViewById(R.id.firstSem);
-
-        Map<String, String[]> classNameAndCredit = new HashMap<>();
-
+        Button addCourseBtn = (Button) findViewById(R.id.addCourse);
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] x = new String[2];
-                x[0] = addCourseName.getText().toString();
-                x[1] = addCredit.getText().toString();
+                String courseName = addCourseName.getText().toString();
+                String creditName = addCredit.getText().toString();
+                String termYear = addTerm.getText().toString();
 
-                classNameAndCredit.put(addTerm.getText().toString(), x);
             }
         });
+
+
     }
-
-
-//    protected void getCourseList() {
-//        DatabaseReference courses = db.child("Courses");
-//        ValueEventListener dataReader = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                //Get map of users in datasnapshot
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d(TAG, "GOod");
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                //handle databaseError
-//                System.out.println("UH OH");
-//            }
-//        };
-//        courses.getDatabase();
-//        Log.d(TAG, "Test");
-//        //FirebaseDatabase.getInstance().getReference().child("hello").addValueEventListener();
-//        courses.addValueEventListener(dataReader);
-//        //courses.addListenerForSingleValueEvent(dataReader);
-//        //courses.setValue("Hello");
-//        // dataReader.
-//        //db.push("Test");
-//        //db.setValue("Something");
 }
