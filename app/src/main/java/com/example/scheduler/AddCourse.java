@@ -127,7 +127,10 @@ public class AddCourse extends AppCompatActivity {
                     tableYear = 2 * (courseYear - startYear);
                 }
                 //CLEAR TEXTS FIELD
-                //db.child[by name userYear[tableYear-1]].add(courseName);
+
+
+
+                //db.child[userYear[tableYear-1]].add(courseName);
             }
         });
     }
