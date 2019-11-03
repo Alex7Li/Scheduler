@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
