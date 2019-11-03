@@ -17,14 +17,14 @@ import java.util.Map;
 
 public class AddCourse extends AppCompatActivity {
     private static final String TAG = AddCourse.class.getName();
-    DatabaseAccessor da;
+    CourseAccessor da;
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
     /*
-     * Returns a {List<String>} containing all courseIDs in {DatabaseAccessor} d
+     * Returns a {List<String>} containing all courseIDs in {CourseAccessor} d
      */
     protected List<String> validTags() {
-        DatabaseAccessor d = new DatabaseAccessor();
+        CourseAccessor d = new CourseAccessor();
         List<String> courseIDs = new ArrayList<>();
         for (Course c : d.updateCourseList()) {
             courseIDs.add(c.getCourseNum());
@@ -42,7 +42,7 @@ public class AddCourse extends AppCompatActivity {
         return preReqStr;
     }
     /*
-     * Function to add course from {TextView} findViewById to new {DatabaseAccessor}
+     * Function to add course from {TextView} findViewById to new {CourseAccessor}
      */
     protected void addCourseToDB() {
         String courseNum = ((TextView) findViewById(R.id.addCourseTitle)).getText().toString();
@@ -76,7 +76,7 @@ public class AddCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
-        da = new DatabaseAccessor();
+        da = new CourseAccessor();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>

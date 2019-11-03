@@ -9,12 +9,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseAccessor {
+class CourseAccessor {
     private DatabaseReference db;
     private List<Course> courses;
-    private boolean updated;
 
-    DatabaseAccessor() {
+    CourseAccessor() {
         db = FirebaseDatabase.getInstance().getReference();
         updateCourseList();
     }
@@ -32,7 +31,7 @@ public class DatabaseAccessor {
     /*
        Get a course by course number, if it's not in the database, return null.
     */
-    protected Course getCourseByNumber(String courseNum) {
+    Course getCourseByNumber(String courseNum) {
         for (Course c : courses) {
             if (c.getCourseNum().equals(courseNum)) {
                 return c;
@@ -44,8 +43,7 @@ public class DatabaseAccessor {
     /*
      * Returns a {List<Course>} courseList populated with courses from this.db.child("Courses")
      */
-    protected List<Course> updateCourseList() {
-        updated = false;
+    List<Course> updateCourseList() {
         DatabaseReference courseRef = db.child("Courses");
         ValueEventListener dataReader = new ValueEventListener() {
             @Override
@@ -70,7 +68,7 @@ public class DatabaseAccessor {
      * For use in getCourseList
      * Populates this.courses with courses from db
      */
-    protected void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
+    private void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
         courses = new ArrayList<>();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
              Course courseInfo = ds.getValue(Course.class);
