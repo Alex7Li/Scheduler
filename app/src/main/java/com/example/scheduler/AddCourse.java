@@ -1,10 +1,16 @@
 package com.example.scheduler;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.EditText;
+import android.view.View.OnClickListener;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,6 +26,10 @@ public class AddCourse extends AppCompatActivity {
     CourseAccessor da;
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
+    private LinearLayout mLayout;
+    private EditText mEditText;
+    private Button mButton;
+
     /*
      * Returns a {List<String>} containing all courseIDs in {CourseAccessor} d
      */
@@ -32,8 +42,11 @@ public class AddCourse extends AppCompatActivity {
         return courseIDs;
     }
 
+    // a list of sublists, where each sublist contains a selection of possible prereqs (OR)
+    // and each list must be combined in and (ex. (CSE 1122 OR CSE 1121) AND (CSE 1111)
     private static List<List<String>> sampleData(){
         List<List<String>> preReqStr = new ArrayList<>();
+        preReqStr.add(new ArrayList<>());
         preReqStr.add(new ArrayList<>());
         preReqStr.add(new ArrayList<>());
         preReqStr.get(0).add("CSE 1111");
@@ -72,6 +85,8 @@ public class AddCourse extends AppCompatActivity {
         da.addCourse(new Course(courseNum, informalName, creditHours, prereqs));
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +105,14 @@ public class AddCourse extends AppCompatActivity {
 
         Map<String, String[]> classNameAndCredit = new HashMap<>();
 
+        mLayout = (LinearLayout) findViewById(R.id.linearlayout);
+        mEditText = (EditText) findViewById(R.id.prereq);
+        mButton = (Button) findViewById(R.id.addOrPrereq);
+        mButton.setOnClickListener(onClick());
+        TextView textView = new TextView(this);
+        textView.setText("New text");
+
+
         addCourseBtn.setOnClickListener(view -> {
             // add to course to the database
             addCourseToDB();
@@ -100,4 +123,24 @@ public class AddCourse extends AppCompatActivity {
             classNameAndCredit.put(addTerm.getText().toString(), x);
         });
     }
+
+    private OnClickListener onClick() {
+        return new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mLayout.addView(createNewTextView(mEditText.getText().toString()));
+            }
+        };
+    }
+
+    private TextView createNewTextView(String text) {
+        final LayoutParams lparams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        final TextView textView = new TextView(this);
+        textView.setLayoutParams(lparams);
+        textView.setText(text);
+        return textView;
+    }
+
+
 }
