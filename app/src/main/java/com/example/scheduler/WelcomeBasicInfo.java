@@ -29,10 +29,12 @@ public class WelcomeBasicInfo extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView accountName = findViewById(R.id.AccountName);
+        TextView accountNameTV = findViewById(R.id.AccountName);
+        String accountName = accountNameTV.getText().toString();
         TextView startingYear = findViewById(R.id.getStartingYear);
 
-        accountAccessor = new AccountAccessor(accountName.toLowerCase(),this);
+        AccountAccessor accountAccessor = new AccountAccessor(accountName);
+        //method to get start year
 
         start = findViewById(R.id.letsStart);
 
