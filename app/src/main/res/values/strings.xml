@@ -15,6 +15,9 @@
     <string name="StartingTermHint">starting term, ex. AU 18</string>
     <string name="StartLabel">Lets get started!</string>
 
+    <string name="OrButton">one of</string>
+    <string name="PrereqLabel">ex. CSE 1223</string>
+
     <string name="Autumn">AU</string>
     <string name="Spring">SP</string>
 
