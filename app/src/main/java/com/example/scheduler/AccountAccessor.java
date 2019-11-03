@@ -136,7 +136,11 @@ public class AccountAccessor {
                     }
                 }
             }
+<<<<<<< HEAD
             if(ma!=null){
+=======
+            if(ma!=null) {
+>>>>>>> 0103b0b9dd8abb35197618ed79a155d7dee0a48f
                 ma.display();
             }
         }else{
