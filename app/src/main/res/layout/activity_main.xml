@@ -74,14 +74,12 @@
                         <TextView
                             android:id="@+id/AUclass1"
                             android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/AUClass" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/SPclass1"
                             android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/SPClass" />
+                            android:layout_height="wrap_content" />
                     </TableRow>
 
                 </TableLayout>
@@ -120,14 +118,12 @@
                         <TextView
                             android:id="@+id/AUclass2"
                             android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/AUClass" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/SPclass2"
                             android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/SPClass" />
+                            android:layout_height="wrap_content" />
                     </TableRow>
 
                 </TableLayout>
@@ -145,14 +141,14 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/textView28"
+                            android:id="@+id/AU3"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/Autumn"
                             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
                         <TextView
-                            android:id="@+id/textView29"
+                            android:id="@+id/SP3"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/Spring"
@@ -166,14 +162,12 @@
                         <TextView
                             android:id="@+id/AUclass3"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/AUClass" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/SPclass3"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/SPClass" />
+                            android:layout_height="wrap_content" />
                     </TableRow>
 
                 </TableLayout>
@@ -212,14 +206,12 @@
                         <TextView
                             android:id="@+id/AUclass4"
                             android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/AUClass" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/SPclass4"
                             android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/SPClass" />
+                            android:layout_height="wrap_content" />
                     </TableRow>
 
                 </TableLayout>
