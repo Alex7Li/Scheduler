@@ -22,11 +22,12 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
     private Button switchActBtn;
     private FloatingActionButton john;
-    public Map<String, String[]> classNameAndCredit = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Database currentDatabase = new Database();
+        currentDatabase.getCourseList();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

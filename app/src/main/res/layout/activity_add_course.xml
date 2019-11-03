@@ -82,8 +82,26 @@
             android:ems="10"
             android:hint="@string/CourseCreditHint"
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="34dp"
-            tools:layout_editor_absoluteY="260dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.161"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCourseTitle"
+            app:layout_constraintVertical_bias="0.039" />
+
+        <EditText
+            android:id="@+id/addCoursePrereqs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/CoursePrereqsHint"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.171"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCourseCredits"
+            app:layout_constraintVertical_bias="0.239" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

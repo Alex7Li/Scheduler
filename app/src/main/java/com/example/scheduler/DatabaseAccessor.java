@@ -47,7 +47,7 @@ public class DatabaseAccessor {
                 //Get map of users in datasnapshot
                 System.out.println(dataSnapshot.getKey());
                 System.out.println(dataSnapshot.getValue());
-                getListOfCourses(dataSnapshot);
+                getListOfCoursesFromDatabase(dataSnapshot);
             }
 
             @Override
@@ -60,14 +60,18 @@ public class DatabaseAccessor {
         return courses;
     }
 
-    protected void getListOfCourses(DataSnapshot dataSnapshot) {
-        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-            Course courseInfo = ds.getValue(Course.class);
-            String courseNum = courseInfo.getCourseNum();
-            int creditHours = courseInfo.getcreditHours();
-            String informalName = courseInfo.getinformalName();
 
-            this.courses.add(courseInfo);
+    protected void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
+        for(DataSnapshot ds : dataSnapshot.getChildren()){
+             Course courseInfo = ds.getValue(Course.class);
+
+             String courseNum = courseInfo.getCourseNum();
+             int creditHours = courseInfo.getcreditHours();
+             String informalName = courseInfo.getinformalName();
+             List<List<String>> prereqs = courseInfo.getPrereqs();
+
+             Course newCourse = new Course(courseNum, informalName, creditHours, prereqs);
+             this.courses.add(courseInfo);
         }
     }
 }
