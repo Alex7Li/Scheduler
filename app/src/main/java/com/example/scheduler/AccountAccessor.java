@@ -16,7 +16,7 @@ import java.util.TreeMap;
 public class AccountAccessor {
     private DatabaseReference db;
     private Map<String, List<String>> coursesByTerm;
-    int startYear;
+    private int startYear;
     private String accountName;
     private MainActivity ma;
     /*
@@ -32,9 +32,10 @@ public class AccountAccessor {
      * Not good constructor for when in mainactivity because
      * race conditions
      */
-    AccountAccessor(String accountName, MainActivity ma) {
+    AccountAccessor(String accountName, int year, MainActivity ma) {
         db = FirebaseDatabase.getInstance().getReference();
         this.ma = ma;
+        this.startYear = year;
         this.accountName = accountName;
         updateCourseList();
 
@@ -69,7 +70,7 @@ public class AccountAccessor {
     }
 
     void makeAccount(){
-        int startYear = 18;
+        int startYear = getStartYear();
         String prefix = accountName + "/" + accountName + "Courses/";
         Map<String, Object> data = new HashMap<>();
         for (int i = 0; i < 4; i++) {
@@ -78,7 +79,9 @@ public class AccountAccessor {
         }
         data.put(accountName + "/" + "StartYear", startYear);
         db.updateChildren(data);
-        ma.display();
+        if(ma!=null) {
+            ma.display();
+        }
         updateCourseList();
     }
 
@@ -133,6 +136,9 @@ public class AccountAccessor {
                     }
                 }
             }
+            if(ma!=null){
+                ma.display();
+            }
         }else{
             makeAccount();
         }
@@ -160,6 +166,7 @@ public class AccountAccessor {
                 this.coursesByTerm.put(ds.getKey(), courses);
             }else{
                 System.out.println(ds.getValue());
+                throw new AssertionError("Bad type of ds get value");
             }
         }
     }

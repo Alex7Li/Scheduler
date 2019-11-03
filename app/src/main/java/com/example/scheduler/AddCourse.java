@@ -121,14 +121,13 @@ public class AddCourse extends AppCompatActivity {
                 (this, android.R.layout.select_dialog_item, fruits);
         AutoCompleteTextView addCourseName = findViewById(R.id.addCourseName);
         addCourseName.setAdapter(adapter);
+        Bundle b = getIntent().getExtras();
+        final int year = b == null ? 0 : b.getInt("year");
+        final String name = b==null?"john":b.getString("name");
 
-        //TODO update account name
-        String accountName = "john";
-        aa = new AccountAccessor(accountName);
+        aa = new AccountAccessor(name);
 
         Button addCourseBtn = findViewById(R.id.addCourse);
-        TextView addCredit = findViewById(R.id.addCourseCredits);
-        TextView addTerm = findViewById(R.id.courseTerm);
 
         String[] userYear = new String[8];
         userYear[0] = "AU1";
@@ -168,29 +167,17 @@ public class AddCourse extends AppCompatActivity {
         TextView textView4 = new TextView(this);
         textView4.setText("New text");
 
-        TextView getStartingYear = findViewById(R.id.getStartingYear);
-
-        String startYearStr = "";//getStartingYear.getText().toString().substring(3);
-        int startYear = 3;// Integer.parseInt(startYearStr);
-
-
-        addCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addCourseToDB();
-                openActivity1();
-//                String[] x = new String[2];
-//                x[0] = addCourseName.getText().toString(); //CSE 2221
-//                x[1] = addCredit.getText().toString();     //4
-//                String termYear = addTerm.getText().toString(); //AU18
-            }
+        addCourseBtn.setOnClickListener(view -> {
+            addCourseToDB();
+            openActivity1(name, year);
         });
-        //CLEAR TEXTS FIELD
-        //db.child[by name userYear[tableYear-1]].add(courseName);
+
     }
 
-    public void openActivity1() {
+    public void openActivity1(String name, int year) {
         Intent intent = new Intent(AddCourse.this, MainActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("year", year);
         startActivity(intent);
     }
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,42 +13,34 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.List;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
     private Button switchActBtn;
     private FloatingActionButton addCourseFloatBtn;
     AccountAccessor accountAccessor;
+    CourseAccessor courseAccessor;
+    int year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Bundle b = getIntent().getExtras();
-        String name;
-        if(b!=null) {
-            name = b.getString("name");
-        }else{
-            name = "john";
-        }
-        accountAccessor = new AccountAccessor(name.toLowerCase(),this);
+        int year = b == null ? 0 : b.getInt("year");
+        final String name = (b == null || (b.getString("name") == null)) ? "john" : b.getString("name");
+
+        courseAccessor = new CourseAccessor();
+        accountAccessor = new AccountAccessor(name.toLowerCase(), year, this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         addCourseFloatBtn = findViewById(R.id.toJohnAct);
 
-        addCourseFloatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity2();
-            }
-        });
+        addCourseFloatBtn.setOnClickListener(view -> openActivity2(name, year));
     }
 
     //will be called by account accessor once it's done with updating the db
-    public void display(){
+    public void display() {
         //set text to table layout
         TextView[] termsAU1toSP4 = new TextView[8];
         termsAU1toSP4[0] = findViewById(R.id.AU1);
@@ -95,9 +86,11 @@ public class MainActivity extends AppCompatActivity {
     /*
      * Starts activity with MainActivity.this as intent
      */
-    public void openActivity2() {
+    public void openActivity2(String name, int year) {
         //send account name from main activity to addCourse
         Intent intent = new Intent(MainActivity.this, AddCourse.class);
+        intent.putExtra("name", name);
+        intent.putExtra("year", year);
         startActivity(intent);
     }
 

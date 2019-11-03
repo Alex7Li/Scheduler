@@ -20,8 +20,6 @@ import android.widget.TextView;
 
 public class WelcomeBasicInfo extends AppCompatActivity {
 
-    private Button start;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +27,8 @@ public class WelcomeBasicInfo extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView accountNameTV = findViewById(R.id.AccountName);
-        String accountName = accountNameTV.getText().toString();
-        TextView startingYear = findViewById(R.id.getStartingYear);
-
-        AccountAccessor accountAccessor = new AccountAccessor(accountName);
         //method to get start year
-
-        start = findViewById(R.id.letsStart);
+        Button start = findViewById(R.id.letsStart);
 
         start.setOnClickListener(view -> openActivity2());
     }
@@ -45,6 +37,7 @@ public class WelcomeBasicInfo extends AppCompatActivity {
         Intent intent = new Intent(WelcomeBasicInfo.this, MainActivity.class);
         String name = ((TextView)findViewById(R.id.AccountName)).getText().toString();
         intent.putExtra("name", name);
+        intent.putExtra("year", R.id.getStartingYear);
         startActivity(intent);
     }
 
