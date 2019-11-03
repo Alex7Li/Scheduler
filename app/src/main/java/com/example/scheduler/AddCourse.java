@@ -58,7 +58,6 @@ public class AddCourse extends AppCompatActivity {
         return courseIDs;
     }
 
-
     // a list of sublists, where each sublist contains a selection of possible prereqs (OR)
     // and each list must be combined in and (ex. (CSE 1122 OR CSE 1121) AND (CSE 1111)
     private static List<List<String>> sampleData(){

@@ -13,6 +13,7 @@
 
     <string name="WelcomeInfo">Welcome! Please enter some basic info</string>
     <string name="StartingTermHint">starting term, ex. AU 18</string>
+    <string name="AccountNameHint">Account Name</string>
     <string name="StartLabel">Lets get started!</string>
 
     <string name="OrButton">one of</string>

@@ -14,20 +14,27 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
     private Button switchActBtn;
     private FloatingActionButton addCourseFloatBtn;
+    AccountAccessor accountAccessor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle b = getIntent().getExtras();
+        String name;
+        if(b!=null) {
+            name = b.getString("name");
+        }else{
+            name = "john";
+        }
+        accountAccessor = new AccountAccessor(name.toLowerCase(),this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,9 +46,13 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
+    }
 
+    //will be called by account accessor once it's done with updating the db
+    public void display(){
         //set text to table layout
         TextView[] termsAU1toSP4 = new TextView[8];
+<<<<<<< HEAD
         termsAU1toSP4[0] = findViewById(R.id.AU1);
         termsAU1toSP4[1] = findViewById(R.id.SP1);
         termsAU1toSP4[2] = findViewById(R.id.AU2);
@@ -85,6 +96,22 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //            i++;
 //        }
+=======
+        TextView[] classNamesAndCredit = new TextView[8];
+
+        Map<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
+
+        int i = 0;
+        for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
+            String setText = termsAU1toSP4[i].getText().toString();
+            termsAU1toSP4[i].setText(setText + "start year" + (i % 2) );
+            for (String courseTaken : entry.getValue()) {
+                classNamesAndCredit[i].append(courseTaken + "      " + "Credit");
+                //idk if this append string to next line
+            }
+            i++;
+        }
+>>>>>>> 159fdcf881f4dc3742285f64d0f25f4763f05707
     }
 
     /*

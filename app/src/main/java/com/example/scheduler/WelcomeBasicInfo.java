@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 
 import android.view.View;
+import android.widget.TextView;
 
 public class WelcomeBasicInfo extends AppCompatActivity {
 
@@ -30,16 +31,17 @@ public class WelcomeBasicInfo extends AppCompatActivity {
 
         start = findViewById(R.id.letsStart);
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity2();
-            }
-        });
+        start.setOnClickListener(view -> openActivity2());
     }
 
     public void openActivity2() {
+<<<<<<< HEAD
         Intent intent = new Intent(WelcomeBasicInfo.this, AddCourse.class);
+=======
+        Intent intent = new Intent(WelcomeBasicInfo.this, MainActivity.class);
+        String name = ((TextView)findViewById(R.id.AccountName)).getText().toString();
+        intent.putExtra("name", name);
+>>>>>>> 159fdcf881f4dc3742285f64d0f25f4763f05707
         startActivity(intent);
     }
 
