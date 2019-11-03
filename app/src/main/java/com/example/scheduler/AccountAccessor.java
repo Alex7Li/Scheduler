@@ -133,6 +133,9 @@ public class AccountAccessor {
                     }
                 }
             }
+            if(ma!=null) {
+                ma.display();
+            }
         }else{
             makeAccount();
         }
