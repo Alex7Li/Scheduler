@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,11 +49,9 @@ public class MainActivity extends AppCompatActivity {
         termsAU1toSP4[6] = findViewById(R.id.AU4);
         termsAU1toSP4[7] = findViewById(R.id.SP4);
 
-//        RecyclerView rv = findViewById(R.id.AUclass1);
-//        rv.add("Hello");
-
 
         TextView[] classNamesAndCredit = new TextView[8];
+        classNamesAndCredit[0] = findViewById(R.id.AUclass1);
         classNamesAndCredit[1] = findViewById(R.id.SPclass1);
         classNamesAndCredit[2] = findViewById(R.id.AUclass2);
         classNamesAndCredit[3] = findViewById(R.id.SPclass2);
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         int numStartYear = accountAccessor.getStartYear();
 
-        for (int i = 0; i < 8; i++){
+        for (int i = 0; i < 1; i++){
             String settext = termsAU1toSP4[i].getText().toString() + numStartYear;
             termsAU1toSP4[i].setText(settext); //input method to get start year later
             String semester = (i%2==0?"AU":"SP") + numStartYear;
