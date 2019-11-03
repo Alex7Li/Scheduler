@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
             String setText = termsAU1toSP4[i].getText().toString();
             numStartYear += (i % 2);
-            termsAU1toSP4[i].setText(String.format("%s%d", setText, numStartYear)); //input method to get start year later
+            termsAU1toSP4[i].setText(setText + numStartYear); //input method to get start year later
 
             for (String courseTaken : entry.getValue()) {
                 classNamesAndCredit[i].append(courseTaken + "      " + "Credit"); //ADD CREDIT LATER
