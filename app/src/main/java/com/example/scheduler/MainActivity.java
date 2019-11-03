@@ -79,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
-            String setText = termsAU1toSP4[i].getText().toString();
+            String settext = termsAU1toSP4[i].getText().toString();
             numStartYear += (i % 2);
-            termsAU1toSP4[i].setText(setText + numStartYear); //input method to get start year later
+            termsAU1toSP4[i].setText(settext + numStartYear); //input method to get start year later
 
             for (String courseTaken : entry.getValue()) {
-                classNamesAndCredit[i].append(courseTaken + "      " + "Credit"); //ADD CREDIT LATER
+                classNamesAndCredit[i].append(courseTaken + "      Credits" + courseTaken); //ADD CREDIT LATER
                 classNamesAndCredit[i].append("\n"); //ADD CREDIT LATER
                 //idk if this append string to next line
             }
