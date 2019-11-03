@@ -39,6 +39,9 @@ public class DatabaseAccessor {
         return null;
     }
 
+    /*
+     * Returns a {List<Course>} courseList populated with courses from this.db.child("Courses")
+     */
     protected List<Course> getCourseList() {
         DatabaseReference courseRef = db.child("Courses");
         ValueEventListener dataReader = new ValueEventListener() {
@@ -61,6 +64,10 @@ public class DatabaseAccessor {
     }
 
 
+    /*
+     * For use in getCourseList
+     * Populates this.courses with courses from db
+     */
     protected void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
         for(DataSnapshot ds : dataSnapshot.getChildren()){
              Course courseInfo = ds.getValue(Course.class);

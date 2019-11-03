@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+     * Starts activity with MainActivity.this as intent
+     */
     public void openActivity2() {
         Intent intent = new Intent(MainActivity.this, AddCourse.class);
         startActivity(intent);
