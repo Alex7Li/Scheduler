@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 //            for (String courseTaken : entry.getValue()) {
 //                if (!classNamesAndCredit[i].getText().toString().contains(courseTaken)) {
 //                    classNamesAndCredit[i].append(courseTaken + "      " + "Credit"); //ADD CREDIT LATER
-//                    classNamesAndCredit[i].append("\n"); //ADD CREDIT LATER
+//                    classNamesAndCredit[i].append(n"); //ADD CREDIT LATER
 //                }
 //                //idk if this append string to next line
 //            }
