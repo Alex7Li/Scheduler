@@ -72,7 +72,9 @@ public class AccountAccessor {
         profile.put(accountName, accountCoursesAndYear);
         db.push().setValue(profile);
         ma.display();
+        updateCourseList();
     }
+
     /*
      * Returns a {List<Course>} courseList populated with courses from this.db.child(AccountName + "Courses")
      */
@@ -126,7 +128,6 @@ public class AccountAccessor {
             }
         }else{
             makeAccount();
-            updateCourseList();
         }
         return this.startYear;
     }
