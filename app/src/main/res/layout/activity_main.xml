@@ -52,18 +52,19 @@
                         android:layout_height="match_parent" >
 
                         <TextView
-                            android:id="@+id/firstSem"
+                            android:id="@+id/AU1"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/Autumn"
                             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
                         <TextView
-                            android:id="@+id/sp"
+                            android:id="@+id/SP1"
                             android:layout_width="172dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/Spring"
                             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
                     </TableRow>
 
                     <TableRow
@@ -71,40 +72,23 @@
                         android:layout_height="match_parent" >
 
                         <TextView
-                            android:id="@+id/firstClass"
+                            android:id="@+id/AUclass1"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/AUClass" />
 
                         <TextView
-                            android:id="@+id/textView19"
+                            android:id="@+id/SPclass1"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/SPClass" />
                     </TableRow>
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="119dp" >
-
-                        <TextView
-                            android:id="@+id/textView20"
-                            android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/AUCredit" />
-
-                        <TextView
-                            android:id="@+id/textView21"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/SPCredit" />
-
-                    </TableRow>
                 </TableLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="70dp" />
+                    android:layout_height="40dp" />
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -115,14 +99,14 @@
                         android:layout_height="16dp">
 
                         <TextView
-                            android:id="@+id/textView22"
+                            android:id="@+id/AU2"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/Autumn"
                             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
                         <TextView
-                            android:id="@+id/textView23"
+                            android:id="@+id/SP2"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/Spring"
@@ -134,40 +118,23 @@
                         android:layout_height="match_parent" >
 
                         <TextView
-                            android:id="@+id/textView25"
+                            android:id="@+id/AUclass2"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/AUClass" />
 
                         <TextView
-                            android:id="@+id/textView24"
+                            android:id="@+id/SPclass2"
                             android:layout_width="172dp"
                             android:layout_height="wrap_content"
                             android:text="@string/SPClass" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/textView27"
-                            android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/AUCredit" />
-
-                        <TextView
-                            android:id="@+id/textView26"
-                            android:layout_width="172dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/SPCredit" />
                     </TableRow>
 
                 </TableLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="675dp" />
+                    android:layout_height="40dp" />
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -194,11 +161,66 @@
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/AUclass3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/AUClass" />
+
+                        <TextView
+                            android:id="@+id/SPclass3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/SPClass" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/AU4"
+                            android:layout_width="172dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Autumn"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+                        <TextView
+                            android:id="@+id/SP4"
+                            android:layout_width="172dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Spring"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/AUclass4"
+                            android:layout_width="172dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/AUClass" />
+
+                        <TextView
+                            android:id="@+id/SPclass4"
+                            android:layout_width="172dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/SPClass" />
+                    </TableRow>
 
                 </TableLayout>
             </LinearLayout>

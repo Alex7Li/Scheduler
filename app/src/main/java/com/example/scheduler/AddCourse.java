@@ -1,10 +1,17 @@
 package com.example.scheduler;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.EditText;
+import android.view.View.OnClickListener;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,6 +27,10 @@ public class AddCourse extends AppCompatActivity {
     CourseAccessor da;
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
+    private LinearLayout mLayout;
+    private EditText mEditText;
+    private Button mButton;
+
     /*
      * Returns a {List<String>} containing all courseIDs in {CourseAccessor} d
      */
@@ -32,8 +43,12 @@ public class AddCourse extends AppCompatActivity {
         return courseIDs;
     }
 
+
+    // a list of sublists, where each sublist contains a selection of possible prereqs (OR)
+    // and each list must be combined in and (ex. (CSE 1122 OR CSE 1121) AND (CSE 1111)
     private static List<List<String>> sampleData(){
         List<List<String>> preReqStr = new ArrayList<>();
+        preReqStr.add(new ArrayList<>());
         preReqStr.add(new ArrayList<>());
         preReqStr.add(new ArrayList<>());
         preReqStr.get(0).add("CSE 1111");
@@ -41,6 +56,7 @@ public class AddCourse extends AppCompatActivity {
         preReqStr.get(1).add("CSE 1122");
         return preReqStr;
     }
+
     /*
      * Function to add course from {TextView} findViewById to new {CourseAccessor}
      */
@@ -49,18 +65,18 @@ public class AddCourse extends AppCompatActivity {
         int creditHours;
         try {
             creditHours = Integer.parseInt(((TextView) findViewById(R.id.addCourseCredits)).getText().toString());
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             creditHours = 0;
         }
         String informalName = ((TextView) findViewById(R.id.addCourseName)).getText().toString();
         List<List<String>> prereqs = new ArrayList<>();
         // populate prereqs... for now we use made up data
         List<List<String>> prereqStrings = sampleData();
-        for (List<String> andList:prereqStrings){
+        for (List<String> andList : prereqStrings) {
             List<String> andCourses = new ArrayList<>();
-            for (String courseName : andList){
+            for (String courseName : andList) {
                 Course c = da.getCourseByNumber(courseName);
-                if(c==null){
+                if (c == null) {
                     // the database doesn't contain a prereq, add it as a stub
                     c = new Course(courseName);
                     da.addCourse(c);
@@ -71,6 +87,8 @@ public class AddCourse extends AppCompatActivity {
         }
         da.addCourse(new Course(courseNum, informalName, creditHours, prereqs));
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,16 +106,92 @@ public class AddCourse extends AppCompatActivity {
         TextView addCredit = findViewById(R.id.addCourseCredits);
         TextView addTerm = findViewById(R.id.courseTerm);
 
-        Map<String, String[]> classNameAndCredit = new HashMap<>();
+
+
+        mLayout = (LinearLayout) findViewById(R.id.linearlayout);
+        mEditText = (EditText) findViewById(R.id.prereq);
+        mButton = (Button) findViewById(R.id.addOrPrereq);
+        mButton.setOnClickListener(onClick());
+        TextView textView = new TextView(this);
+        textView.setText("New text");
+
 
         addCourseBtn.setOnClickListener(view -> {
-            // add to course to the database
-            addCourseToDB();
-            String[] x = new String[2];
-            x[0] = addCourseName.getText().toString();
-            x[1] = addCredit.getText().toString();
+                    // add to course to the database
+                    addCourseToDB();
+                    String[] x = new String[2];
+                    x[0] = addCourseName.getText().toString();
+                    x[1] = addCredit.getText().toString();});
 
-            classNameAndCredit.put(addTerm.getText().toString(), x);
-        });
+            String[] userYear = new String[8];
+            userYear[0] = "AU1";
+            userYear[1] = "SP1";
+            userYear[2] = "AU2";
+            userYear[3] = "SP2";
+            userYear[4] = "AU3";
+            userYear[5] = "SP3";
+            userYear[6] = "AU4";
+            userYear[7] = "SP4";
+
+            TextView getStartingYear = findViewById(R.id.getStartingYear);
+
+            String startYearStr = "";//getStartingYear.getText().toString().substring(3);
+            int startYear = 3;// Integer.parseInt(startYearStr);
+
+
+            addCourseBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addCourseToDB();
+                    String[] x = new String[2];
+                    x[0] = addCourseName.getText().toString(); //CSE 2221
+                    x[1] = addCredit.getText().toString();     //4
+                    String termYear = addTerm.getText().toString(); //AU18
+
+                    String courseYearStr = termYear.substring(3);
+                    int courseYear = 3;//Integer.parseInt(courseYearStr);
+
+                    int tableYear = 0;
+
+                    if (termYear.contains("AU")) {
+                        tableYear = 2 * (courseYear - startYear) + 1;
+                    } else {
+                        tableYear = 2 * (courseYear - startYear);
+                    }
+                    //CLEAR TEXTS FIELD
+                    //db.child[by name userYear[tableYear-1]].add(courseName);
+                }
+                });
+        }
+
+
+    private OnClickListener onClick() {
+        return new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mLayout.addView(createNewTextView(mEditText.getText().toString()));
+            }
+        };
     }
-}
+
+    private TextView createNewTextView(String text) {
+        final LayoutParams lparams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        final TextView textView = new TextView(this);
+        textView.setLayoutParams(lparams);
+        textView.setText(text);
+        return textView;
+    }}
+
+//        Map<String, String[]> classNameAndCredit = new HashMap<>();
+//
+//        addCourseBtn.setOnClickListener(view -> {
+//            // add to course to the database
+//            addCourseToDB();
+//            String[] x = new String[2];
+//            x[0] = addCourseName.getText().toString();
+//            x[1] = addCredit.getText().toString();
+//
+//            classNameAndCredit.put(addTerm.getText().toString(), x);
+//        });
+

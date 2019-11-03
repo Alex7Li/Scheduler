@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //set text to table layout
+        TextView[] termsAU1toSP4 = new TextView[8];
+        TextView[] classNamesAndCredit = new TextView[8];
+
+//        for (int i = 0; i < accoutCoursesChild; i++) {
+//            child course = accountCourses[i];
+//            termsAU1toSP4[i].setText(course.year);//year child); accoutAU1.YEAR
+//            for (int j = 0; j < courseChild; i++) {
+//                classNamesAndCredit[i].setText();
+//                //class name child + credit number AU1.class[j].classname and credit number
+//        }
+//        }
 
     }
 
