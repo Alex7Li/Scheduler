@@ -56,14 +56,19 @@ public class AddCourse extends AppCompatActivity {
         TextView addTerm = findViewById(R.id.courseTerm);
 
         Button addCourseBtn = (Button) findViewById(R.id.addCourse);
-        addCourseBtn.setOnClickListener(new View.OnClickListener() {
+
+        //ArrayList<String> userYear = ;
+
+
+         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addCourse();
                 String[] x = new String[2];
-                x[0] = addCourseName.getText().toString();
-                x[1] = addCredit.getText().toString();
-                String termYear = addTerm.getText().toString();
+                x[0] = addCourseName.getText().toString(); //CSE 2221
+                x[1] = addCredit.getText().toString();     //4
+                String termYear = addTerm.getText().toString(); //AU18
+
 
             }
         });
