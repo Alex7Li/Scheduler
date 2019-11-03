@@ -15,7 +15,7 @@ import java.util.TreeMap;
 
 public class AccountAccessor {
     private DatabaseReference db;
-    private TreeMap<String, List<String>> coursesByTerm;
+    private Map<String, List<String>> coursesByTerm;
     int startYear;
     private String accountName;
     private MainActivity ma;
@@ -44,7 +44,7 @@ public class AccountAccessor {
      * Return {List<Course>} this.accountCourses
      */
     public Map<String, List<String>> getAccountCourses(){
-        return this.coursesByTerm;
+        return new TreeMap<>(this.coursesByTerm);
     }
 
     /*
@@ -60,17 +60,14 @@ public class AccountAccessor {
 
     void makeAccount(){
         int startYear = 18;
-        Map<String, Object> semesterData = new TreeMap<>(termComparator);
+        String prefix = accountName + "/" + accountName + "Courses/";
+        Map<String, Object> data = new HashMap<>();
         for (int i = 0; i < 4; i++) {
-            semesterData.put("AU" + (startYear + i), new HashMap<String, String>());
-            semesterData.put("SP" + (startYear + i), new HashMap<String, String>());
-        };
-        Map<String, Object> accountCoursesAndYear = new HashMap<>();
-        accountCoursesAndYear.put("StartYear", startYear);
-        accountCoursesAndYear.put(accountName + "Courses", semesterData);
-        Map<String, Object> profile = new HashMap<>();
-        profile.put(accountName, accountCoursesAndYear);
-        db.push().setValue(profile);
+            data.put(prefix + "AU" + (startYear + i), "");
+            data.put(prefix + "SP" + (startYear + i), "");
+        }
+        data.put(accountName + "/" + "StartYear", startYear);
+        db.updateChildren(data);
         ma.display();
         updateCourseList();
     }
@@ -127,7 +124,7 @@ public class AccountAccessor {
                 }
             }
         }else{
-            //makeAccount();
+            makeAccount();
         }
         return this.startYear;
     }
@@ -136,9 +133,12 @@ public class AccountAccessor {
      * Populates {List<List<String>>} this.coursesByTerm with {List<String>} terms from db
      */
     private void getListOfTermsFromDatabase(DataSnapshot dataSnapshot) {
-        this.coursesByTerm = new TreeMap<>(termComparator);
+        this.coursesByTerm = new HashMap();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
-            TreeMap<String, String> termCourses = ds.getValue(TreeMap.class);
+            if(ds.getValue().equals("")){
+                continue;
+            }
+            HashMap<String, String> termCourses = ds.getValue(HashMap.class);
             List<String> courses = new ArrayList<String>();
             courses.addAll(termCourses.values());
             this.coursesByTerm.put(ds.getKey(), courses);
