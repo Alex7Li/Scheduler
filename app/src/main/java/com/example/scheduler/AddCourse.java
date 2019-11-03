@@ -125,19 +125,16 @@ public class AddCourse extends AppCompatActivity {
 
         Button addCourseBtn = findViewById(R.id.addCourse);
 
-        AutoCompleteTextView courseFill = (AutoCompleteTextView) findViewById(R.id.addCourseName);
+        AutoCompleteTextView courseFill = findViewById(R.id.addCourseName);
 
-        addCourseName.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selected = (String) parent.getItemAtPosition(position);
-                System.out.println(selected);
-                Course c = CourseAccessor.getCourseByNumber(selected);
-                TextView addCourseTitle = findViewById(R.id.addCourseTitle);
-                TextView addCourseCredits = findViewById(R.id.addCourseCredits);
-                addCourseTitle.setText(c.getinformalName());
-                addCourseCredits.setText(c.getcreditHours()+"");
-            }
+        addCourseName.setOnItemClickListener((parent, view, position, id) -> {
+            String selected = (String) parent.getItemAtPosition(position);
+            System.out.println(selected);
+            Course c = CourseAccessor.getCourseByNumber(selected);
+            TextView addCourseTitle = findViewById(R.id.addCourseTitle);
+            TextView addCourseCredits = findViewById(R.id.addCourseCredits);
+            addCourseTitle.setText(c.getinformalName());
+            addCourseCredits.setText(c.getcreditHours()+"");
         });
 
         String[] userYear = new String[8];
