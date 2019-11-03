@@ -8,19 +8,23 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class Database {
+public class DatabaseAccessor {
     private DatabaseReference db;
     private List<Course> courses;
 
-    public Database() {
+    DatabaseAccessor() {
         db = FirebaseDatabase.getInstance().getReference();
     }
 
-    protected void addCourse(Course c) {
+    /*
+      Add a course to the database
+     */
+    void addCourse(Course c) {
         DatabaseReference courses = db.child("Courses");
         DatabaseReference coursesChild = courses.push();
         coursesChild.setValue(c);
     }
+
 
     /*
        Get a course by course number, if it's not in the database, return null.
@@ -35,12 +39,6 @@ public class Database {
         return null;
     }
 
-    /*
-    ArrayList<String> preReqs = new ArrayList<String>();
-        preReqs.add("CSE 1111");
-        preReqs.add("CSE 1112");
-    Course c = new Course("CSE1113", "Programming for Nerds", 3, preReqs);
-    */
     protected List<Course> getCourseList() {
         DatabaseReference courseRef = db.child("Courses");
         ValueEventListener dataReader = new ValueEventListener() {
@@ -63,13 +61,13 @@ public class Database {
     }
 
     protected void getListOfCourses(DataSnapshot dataSnapshot) {
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-             Course courseInfo = ds.getValue(Course.class);
-             String courseNum = courseInfo.getCourseNum();
-             int creditHours = courseInfo.getcreditHours();
-             String informalName = courseInfo.getinformalName();
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+            Course courseInfo = ds.getValue(Course.class);
+            String courseNum = courseInfo.getCourseNum();
+            int creditHours = courseInfo.getcreditHours();
+            String informalName = courseInfo.getinformalName();
 
-             this.courses.add(courseInfo);
+            this.courses.add(courseInfo);
         }
     }
 }

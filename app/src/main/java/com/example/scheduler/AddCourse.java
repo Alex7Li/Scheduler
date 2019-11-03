@@ -1,7 +1,6 @@
 package com.example.scheduler;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -20,7 +19,7 @@ public class AddCourse extends AppCompatActivity {
 
     // get the valid tags for a course
     protected List<String> validTags(){
-        Database d = new Database();
+        DatabaseAccessor d = new DatabaseAccessor();
         List<String> courseIDs = new ArrayList<>();
         for(Course c: d.getCourseList()){
             courseIDs.add(c.getCourseNum());
@@ -28,6 +27,13 @@ public class AddCourse extends AppCompatActivity {
         return courseIDs;
     }
 
+    protected void addCourse(){
+        String courseNum = ((TextView)findViewById(R.id.addCourseTitle)).getText().toString();;
+        int creditHours= Integer.parseInt(((TextView)findViewById(R.id.addCourseCredits)).getText().toString());
+        String informalName = ((TextView)findViewById(R.id.addCourseName)).getText().toString();
+        List<List<String>> prereqs = new ArrayList<>();
+        new DatabaseAccessor().addCourse(new Course(courseNum, informalName, creditHours, prereqs));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +58,7 @@ public class AddCourse extends AppCompatActivity {
 
         Button switchActBtn = (Button) findViewById(R.id.addCourse);
 
-        switchActBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("");
-            }
-        });
+        switchActBtn.setOnClickListener(view -> addCourse());
 
         TextView firstClass = findViewById(R.id.firstClass);
         TextView firstSem = findViewById(R.id.firstSem);
@@ -66,7 +67,5 @@ public class AddCourse extends AppCompatActivity {
 //            firstSem.setText(entry.getKey());
 //            firstClass.setText(entry.getValue()[0] + "      " + entry.getValue()[1]);
 //        }
-
-
     }
 }
