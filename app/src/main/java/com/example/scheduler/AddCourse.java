@@ -18,29 +18,23 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.scheduler.CourseAccessor.courses;
+
 
 public class AddCourse extends AppCompatActivity {
-    private static final String TAG = AddCourse.class.getName();
-    CourseAccessor da;
     AccountAccessor aa;
-
-    String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
     private LinearLayout mLayout1;
     private EditText mEditText1;
-    private Button mButton1;
 
     private LinearLayout mLayout2;
     private EditText mEditText2;
-    private Button mButton2;
 
     private LinearLayout mLayout3;
     private EditText mEditText3;
-    private Button mButton3;
 
     private LinearLayout mLayout4;
     private EditText mEditText4;
-    private Button mButton4;
 
     private static List<String> prereqs1 = new ArrayList<>();
     private static List<String> prereqs2 = new ArrayList<>();
@@ -51,18 +45,18 @@ public class AddCourse extends AppCompatActivity {
     /*
      * Returns a {List<String>} containing all courseIDs in {CourseAccessor} d
      */
-    protected List<String> validTags() {
-        CourseAccessor d = new CourseAccessor();
-        List<String> courseIDs = new ArrayList<>();
-        for (Course c : d.updateCourseList()) {
-            courseIDs.add(c.getCourseNum());
+    protected String[] validTags() {
+        int n = courses == null ? 0 : courses.size();
+        String[] tags = new String[n];
+        for (int i = 0; i < n; i++) {
+            tags[i] = courses.get(i).getCourseNum();
         }
-        return courseIDs;
+        return tags;
     }
 
     // a list of sublists, where each sublist contains a selection of possible prereqs (OR)
     // and each list must be combined in and (ex. (CSE 1122 OR CSE 1121) AND (CSE 1111)
-    private static List<List<String>> sampleData(){
+    private static List<List<String>> sampleData() {
         List<List<String>> preReqStr = new ArrayList<>();
         preReqStr.add(new ArrayList<>());
         preReqStr.add(new ArrayList<>());
@@ -93,37 +87,34 @@ public class AddCourse extends AppCompatActivity {
         for (List<String> andList : prereqStrings) {
             List<String> andCourses = new ArrayList<>();
             for (String courseName : andList) {
-                Course c = da.getCourseByNumber(courseName);
+                Course c = CourseAccessor.getCourseByNumber(courseName);
                 if (c == null) {
                     // the database doesn't contain a prereq, add it as a stub
                     c = new Course(courseName);
-                    da.addCourse(c);
+                    CourseAccessor.addCourse(c);
                 }
                 andCourses.add(courseName);
             }
             prereqs.add(andCourses);
         }
-        da.addCourse(new Course(courseNum, informalName, creditHours, prereqs));
-        String term = ((TextView)findViewById(R.id.courseTerm)).getText().toString();
+        CourseAccessor.addCourse(new Course(courseNum, informalName, creditHours, prereqs));
+        String term = ((TextView) findViewById(R.id.courseTerm)).getText().toString();
         aa.addCourseToTerm(courseNum, term);
     }
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
-        da = new CourseAccessor();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, fruits);
+                (this, android.R.layout.select_dialog_item, validTags());
         AutoCompleteTextView addCourseName = findViewById(R.id.addCourseName);
         addCourseName.setAdapter(adapter);
         Bundle b = getIntent().getExtras();
-        final int year = b == null ? 0 : b.getInt("year");
-        final String name = b==null?"john":b.getString("name");
+        final String name = b == null ? "john" : b.getString("name");
 
         aa = new AccountAccessor(name);
 
@@ -139,88 +130,62 @@ public class AddCourse extends AppCompatActivity {
         userYear[6] = "AU4";
         userYear[7] = "SP4";
 
-        mLayout1 = (LinearLayout) findViewById(R.id.linearlayout1);
-        mEditText1 = (EditText) findViewById(R.id.prereq1);
-        mButton1 = (Button) findViewById(R.id.addOrPrereq1);
+        mLayout1 = findViewById(R.id.linearlayout1);
+        mEditText1 = findViewById(R.id.prereq1);
+        Button mButton1 = findViewById(R.id.addOrPrereq1);
         mButton1.setOnClickListener(onClick1());
         TextView textView1 = new TextView(this);
         textView1.setText("New text");
 
-        mLayout2 = (LinearLayout) findViewById(R.id.linearlayout2);
-        mEditText2 = (EditText) findViewById(R.id.prereq2);
-        mButton2 = (Button) findViewById(R.id.addOrPrereq2);
+        mLayout2 = findViewById(R.id.linearlayout2);
+        mEditText2 = findViewById(R.id.prereq2);
+        Button mButton2 = findViewById(R.id.addOrPrereq2);
         mButton2.setOnClickListener(onClick2());
         TextView textView2 = new TextView(this);
         textView2.setText("New text");
 
-        mLayout3 = (LinearLayout) findViewById(R.id.linearlayout3);
-        mEditText3 = (EditText) findViewById(R.id.prereq3);
-        mButton3 = (Button) findViewById(R.id.addOrPrereq3);
+        mLayout3 = findViewById(R.id.linearlayout3);
+        mEditText3 = findViewById(R.id.prereq3);
+        Button mButton3 = findViewById(R.id.addOrPrereq3);
         mButton3.setOnClickListener(onClick3());
         TextView textView3 = new TextView(this);
         textView3.setText("New text");
 
-        mLayout4 = (LinearLayout) findViewById(R.id.linearlayout4);
-        mEditText4 = (EditText) findViewById(R.id.prereq4);
-        mButton4 = (Button) findViewById(R.id.addOrPrereq4);
+        mLayout4 = findViewById(R.id.linearlayout4);
+        mEditText4 = findViewById(R.id.prereq4);
+        Button mButton4 = findViewById(R.id.addOrPrereq4);
         mButton4.setOnClickListener(onClick4());
         TextView textView4 = new TextView(this);
         textView4.setText("New text");
 
         addCourseBtn.setOnClickListener(view -> {
             addCourseToDB();
-            openActivity1(name, year);
+            openActivity1(name);
         });
 
     }
 
-    public void openActivity1(String name, int year) {
+    public void openActivity1(String name) {
         Intent intent = new Intent(AddCourse.this, MainActivity.class);
         intent.putExtra("name", name);
-        intent.putExtra("year", year);
         startActivity(intent);
     }
 
     private OnClickListener onClick1() {
-        return new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mLayout1.addView(createNewTextView1(mEditText1.getText().toString()));
-            }
-        };
+        return v -> mLayout1.addView(createNewTextView1(mEditText1.getText().toString()));
     }
 
     private OnClickListener onClick2() {
-        return new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mLayout2.addView(createNewTextView2(mEditText2.getText().toString()));
-            }
-        };
+        return v -> mLayout2.addView(createNewTextView2(mEditText2.getText().toString()));
     }
 
     private OnClickListener onClick3() {
-        return new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mLayout3.addView(createNewTextView3(mEditText3.getText().toString()));
-
-            }
-        };
+        return v -> mLayout3.addView(createNewTextView3(mEditText3.getText().toString()));
     }
 
 
     private OnClickListener onClick4() {
-        return new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mLayout4.addView(createNewTextView4(mEditText4.getText().toString()));
-            }
-        };
+        return v -> mLayout4.addView(createNewTextView4(mEditText4.getText().toString()));
     }
 
 

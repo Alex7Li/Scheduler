@@ -55,7 +55,7 @@ public class AccountAccessor {
      * Return {List<Course>} this.accountCourses
      */
     public Map<String, List<String>> getAccountCourses(){
-        return new TreeMap<>(this.coursesByTerm);
+        return new HashMap<>(this.coursesByTerm);
     }
 
     /*
@@ -149,7 +149,7 @@ public class AccountAccessor {
      * Populates {List<List<String>>} this.coursesByTerm with {List<String>} terms from db
      */
     private void getListOfTermsFromDatabase(DataSnapshot dataSnapshot) {
-        this.coursesByTerm = new HashMap();
+        this.coursesByTerm = new HashMap<String, List<String>>();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
             if(ds.getValue().equals("")){
                 continue;

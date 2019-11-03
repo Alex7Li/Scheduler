@@ -11,35 +11,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private DatabaseReference db;
     private Button switchActBtn;
     private FloatingActionButton addCourseFloatBtn;
     AccountAccessor accountAccessor;
-    CourseAccessor courseAccessor;
-    int year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Bundle b = getIntent().getExtras();
-        int year = b == null ? 0 : b.getInt("year");
+        final int year = b == null ? 0 : b.getInt("year");
         final String name = (b == null || (b.getString("name") == null)) ? "john" : b.getString("name");
 
-        courseAccessor = new CourseAccessor();
         accountAccessor = new AccountAccessor(name.toLowerCase(), year, this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         addCourseFloatBtn = findViewById(R.id.toJohnAct);
-
-        addCourseFloatBtn.setOnClickListener(view -> openActivity2(name, year));
+        addCourseFloatBtn.setOnClickListener(view -> openActivity2(name));
     }
 
     //will be called by account accessor once it's done with updating the db
@@ -68,32 +62,29 @@ public class MainActivity extends AppCompatActivity {
 
         Map<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
 
-        int i = 0;
-        int numStartYear = 18;
+        int numStartYear = accountAccessor.getStartYear();
 
+        for (int i = 0; i < 8; i++){
+            String settext = termsAU1toSP4[i].getText().toString() + numStartYear;
+            termsAU1toSP4[i].setText(settext); //input method to get start year later
+            String semester = (i%2==0?"AU":"SP") + numStartYear;
+            numStartYear +=i%2;
 
-        for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
-            String settext = termsAU1toSP4[i].getText().toString();
-            numStartYear += (i % 2);
-            termsAU1toSP4[i].setText(settext + numStartYear); //input method to get start year later
-
-            for (String courseTaken : entry.getValue()) {
-                classNamesAndCredit[i].append(courseTaken + "      Credits" + courseTaken); //ADD CREDIT LATER
-                classNamesAndCredit[i].append("\n"); //ADD CREDIT LATER
-                //idk if this append string to next line
-            }
-            i++;
+            try {
+                for (String courseTaken : coursesByTerm.get(semester)) {
+                    classNamesAndCredit[i].append(courseTaken + "\tCredits\t" + CourseAccessor.getCourseByNumber(courseTaken).getcreditHours());
+                }
+            }catch (NullPointerException ignored){}
         }
     }
 
     /*
      * Starts activity with MainActivity.this as intent
      */
-    public void openActivity2(String name, int year) {
+    public void openActivity2(String name) {
         //send account name from main activity to addCourse
         Intent intent = new Intent(MainActivity.this, AddCourse.class);
         intent.putExtra("name", name);
-        intent.putExtra("year", year);
         startActivity(intent);
     }
 

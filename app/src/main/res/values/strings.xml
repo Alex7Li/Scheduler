@@ -12,7 +12,7 @@
     <string name="CourseTermHint">ex. AU 19</string>
 
     <string name="WelcomeInfo">Welcome! Enter an Account Username OR 1st College Year</string>
-    <string name="StartingTermHint">starting term, ex. AU 18</string>
+    <string name="StartingTermHint">starting term, ex. AU18</string>
     <string name="AccountNameHint">Account Name</string>
     <string name="StartLabel">Lets get started!</string>
 

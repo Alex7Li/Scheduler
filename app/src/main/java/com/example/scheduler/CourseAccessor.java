@@ -10,18 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 class CourseAccessor {
-    private DatabaseReference db;
-    private List<Course> courses;
-
-    CourseAccessor() {
-        db = FirebaseDatabase.getInstance().getReference();
+    private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+    static List<Course> courses;
+    static {
         updateCourseList();
     }
 
     /*
       Add a course to the database
      */
-    void addCourse(Course c) {
+    static void addCourse(Course c) {
         DatabaseReference courses = db.child("Courses");
         DatabaseReference coursesChild = courses.push();
         coursesChild.setValue(c);
@@ -33,7 +31,7 @@ class CourseAccessor {
     /*
        Get a course by course number, if it's not in the database, return null.
     */
-    Course getCourseByNumber(String courseNum) {
+    static Course getCourseByNumber(String courseNum) {
         for (Course c : courses) {
             if (c.getCourseNum().equals(courseNum)) {
                 return c;
@@ -45,7 +43,7 @@ class CourseAccessor {
     /*
      * Returns a {List<Course>} courseList populated with courses from this.db.child("Courses")
      */
-    List<Course> updateCourseList() {
+    static List<Course> updateCourseList() {
         DatabaseReference courseRef = db.child("Courses");
         ValueEventListener dataReader = new ValueEventListener() {
             @Override
@@ -61,7 +59,6 @@ class CourseAccessor {
             }
         };
         courseRef.addListenerForSingleValueEvent(dataReader);
-
         return courses;
     }
 
@@ -70,7 +67,7 @@ class CourseAccessor {
      * For use in getCourseList
      * Populates this.courses with courses from db
      */
-    private void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
+    private static void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
         courses = new ArrayList<>();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
              Course courseInfo = ds.getValue(Course.class);
@@ -81,7 +78,7 @@ class CourseAccessor {
              List<List<String>> prereqs = courseInfo.getPrereqs();
 
              Course newCourse = new Course(courseNum, informalName, creditHours, prereqs);
-             this.courses.add(newCourse);
+             courses.add(newCourse);
         }
     }
 }

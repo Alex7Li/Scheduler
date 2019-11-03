@@ -30,6 +30,9 @@ public class WelcomeBasicInfo extends AppCompatActivity {
         //method to get start year
         Button start = findViewById(R.id.letsStart);
 
+        //wake up course accessor class
+        new CourseAccessor();
+
         start.setOnClickListener(view -> openActivity2());
     }
 
@@ -37,7 +40,16 @@ public class WelcomeBasicInfo extends AppCompatActivity {
         Intent intent = new Intent(WelcomeBasicInfo.this, MainActivity.class);
         String name = ((TextView)findViewById(R.id.AccountName)).getText().toString();
         intent.putExtra("name", name);
-        intent.putExtra("year", R.id.getStartingYear);
+        String yearStr= ((TextView)findViewById(R.id.getStartingYear)).getText().toString();
+        String[] ahh = yearStr.split( "[ a-zA-Z]");
+        int year;
+        try {
+            year = Integer.parseInt(ahh[ahh.length-1]);
+
+        }catch (NumberFormatException e){
+            year = 0;
+        }
+        intent.putExtra("year", year);
         startActivity(intent);
     }
 
