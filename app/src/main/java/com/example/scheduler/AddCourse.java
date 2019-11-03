@@ -174,8 +174,6 @@ public class AddCourse extends AppCompatActivity {
                 x[0] = addCourseName.getText().toString(); //CSE 2221
                 x[1] = addCredit.getText().toString();     //4
                 String termYear = addTerm.getText().toString(); //AU18
-
-
             }
         });
         //CLEAR TEXTS FIELD
@@ -260,5 +258,5 @@ public class AddCourse extends AppCompatActivity {
         prereqs4.add(text);
         return textView;
     }
-
 }
+

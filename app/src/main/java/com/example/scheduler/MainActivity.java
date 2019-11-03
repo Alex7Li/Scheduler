@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         TextView[] termsAU1toSP4 = new TextView[8];
         TextView[] classNamesAndCredit = new TextView[8];
 
-        TreeMap<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
+        Map<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
 
         int i = 0;
         for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
