@@ -14,21 +14,27 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
     private Button switchActBtn;
     private FloatingActionButton addCourseFloatBtn;
+    AccountAccessor accountAccessor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AccountAccessor accountAccessor = new AccountAccessor("john");
         setContentView(R.layout.activity_main);
+        Bundle b = getIntent().getExtras();
+        String name;
+        if(b!=null) {
+            name = b.getString("name");
+        }else{
+            name = "john";
+        }
+        accountAccessor = new AccountAccessor(name.toLowerCase(),this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
+    }
 
+    //will be called by account accessor once it's done with updating the db
+    public void display(){
         //set text to table layout
         TextView[] termsAU1toSP4 = new TextView[8];
         TextView[] classNamesAndCredit = new TextView[8];
@@ -57,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
             }
             i++;
         }
-
-
-
     }
 
     /*
