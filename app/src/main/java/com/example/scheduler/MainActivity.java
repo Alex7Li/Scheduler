@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     public void display(){
         //set text to table layout
         TextView[] termsAU1toSP4 = new TextView[8];
-
         termsAU1toSP4[0] = findViewById(R.id.AU1);
         termsAU1toSP4[1] = findViewById(R.id.SP1);
         termsAU1toSP4[2] = findViewById(R.id.AU2);
