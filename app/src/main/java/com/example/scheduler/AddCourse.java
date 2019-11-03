@@ -57,23 +57,6 @@ public class AddCourse extends AppCompatActivity {
         return courseIDs;
     }
 
-    private OnClickListener onClick() {
-        return new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mLayout.addView(createNewTextView(mEditText.getText().toString()));
-            }
-        };
-    }
-
-    private TextView createNewTextView(String text) {
-        final LayoutParams lparams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        final TextView textView = new TextView(this);
-        textView.setLayoutParams(lparams);
-        textView.setText(text);
-        return textView;
-    }
 
     // a list of sublists, where each sublist contains a selection of possible prereqs (OR)
     // and each list must be combined in and (ex. (CSE 1122 OR CSE 1121) AND (CSE 1111)
@@ -179,54 +162,6 @@ public class AddCourse extends AppCompatActivity {
 
         TextView getStartingYear = findViewById(R.id.getStartingYear);
 
-<<<<<<< HEAD
-        addCourseBtn.setOnClickListener(view -> {
-                    // add to course to the database
-                    addCourseToDB();
-                    String[] x = new String[2];
-                    x[0] = addCourseName.getText().toString();
-                    x[1] = addCredit.getText().toString();});
-
-            String[] userYear = new String[8];
-            userYear[0] = "AU1";
-            userYear[1] = "SP1";
-            userYear[2] = "AU2";
-            userYear[3] = "SP2";
-            userYear[4] = "AU3";
-            userYear[5] = "SP3";
-            userYear[6] = "AU4";
-            userYear[7] = "SP4";
-
-            TextView getStartingYear = findViewById(R.id.getStartingYear);
-
-            String startYearStr = "";//getStartingYear.getText().toString().substring(3);
-            int startYear = 3;// Integer.parseInt(startYearStr);
-
-
-            addCourseBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addCourseToDB();
-                    String[] x = new String[2];
-                    x[0] = addCourseName.getText().toString(); //CSE 2221
-                    x[1] = addCredit.getText().toString();     //4
-                    String termYear = addTerm.getText().toString(); //AU18
-
-                    if(termYear.length()>3) {
-                        //String courseYearStr = termYear.substring(3);
-                    }
-                    int courseYear = 3;//Integer.parseInt(courseYearStr);
-
-                    int tableYear = 0;
-
-                    if (termYear.contains("AU")) {
-                        tableYear = 2 * (courseYear - startYear) + 1;
-                    } else {
-                        tableYear = 2 * (courseYear - startYear);
-                    }
-                    //CLEAR TEXTS FIELD
-                    //db.child[by name userYear[tableYear-1]].add(courseName);
-=======
         String startYearStr = "";//getStartingYear.getText().toString().substring(3);
         int startYear = 3;// Integer.parseInt(startYearStr);
 
@@ -240,21 +175,13 @@ public class AddCourse extends AppCompatActivity {
                 x[1] = addCredit.getText().toString();     //4
                 String termYear = addTerm.getText().toString(); //AU18
 
-                String courseYearStr = termYear.substring(3);
-                int courseYear = 3;//Integer.parseInt(courseYearStr);
 
-                int tableYear = 0;
-
-                if (termYear.contains("AU")) {
-                    tableYear = 2 * (courseYear - startYear) + 1;
-                } else {
-                    tableYear = 2 * (courseYear - startYear);
->>>>>>> f215e72f77010b4d009f52923a4026213c08de84
                 }
+            });
                 //CLEAR TEXTS FIELD
+                //db.child[by name userYear[tableYear-1]].add(courseName);
+    }
 
-
-<<<<<<< HEAD
     private OnClickListener onClick1() {
         return new OnClickListener() {
 
@@ -281,14 +208,11 @@ public class AddCourse extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mLayout3.addView(createNewTextView3(mEditText3.getText().toString()));
-=======
 
-                //db.child[userYear[tableYear-1]].add(courseName);
->>>>>>> f215e72f77010b4d009f52923a4026213c08de84
             }
-        });
+        };
     }
-<<<<<<< HEAD
+
 
     private OnClickListener onClick4() {
         return new OnClickListener() {
@@ -338,19 +262,3 @@ public class AddCourse extends AppCompatActivity {
     }
 
 }
-
-=======
-}
->>>>>>> f215e72f77010b4d009f52923a4026213c08de84
-//        Map<String, String[]> classNameAndCredit = new HashMap<>();
-//
-//        addCourseBtn.setOnClickListener(view -> {
-//            // add to course to the database
-//            addCourseToDB();
-//            String[] x = new String[2];
-//            x[0] = addCourseName.getText().toString();
-//            x[1] = addCredit.getText().toString();
-//
-//            classNameAndCredit.put(addTerm.getText().toString(), x);
-//        });
-
