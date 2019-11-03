@@ -61,8 +61,20 @@ public class AddCourse extends AppCompatActivity {
 
         Button addCourseBtn = (Button) findViewById(R.id.addCourse);
 
-        //ArrayList<String> userYear = ;
+        String[] userYear = new String[8];
+        userYear[0]="AU1";
+        userYear[1]="SP1";
+        userYear[2]="AU2";
+        userYear[3]="SP2";
+        userYear[4]="AU3";
+        userYear[5]="SP3";
+        userYear[6]="AU4";
+        userYear[7]="SP4";
 
+        TextView getStartingYear = findViewById(R.id.getStartingYear);
+
+        String startYearStr = getStartingYear.getText().toString().substring(3);
+        int startYear = Integer.parseInt(startYearStr);
 
 
          addCourseBtn.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +86,18 @@ public class AddCourse extends AppCompatActivity {
                 x[1] = addCredit.getText().toString();     //4
                 String termYear = addTerm.getText().toString(); //AU18
 
+                String courseYearStr = termYear.substring(3);
+                int courseYear = Integer.parseInt(courseYearStr);
 
+                int tableYear = 0;
 
                 if (termYear.contains("AU")) {
-
+                    tableYear = 2*(courseYear - startYear) + 1;
+                } else {
+                    tableYear = 2*(courseYear - startYear);
                 }
+
+                //db.child[by name userYear[tableYear-1]].add(courseName);
 
             }
         });
