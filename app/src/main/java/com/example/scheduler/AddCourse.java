@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class AddCourse extends AppCompatActivity {
     private static final String TAG = AddCourse.class.getName();
 
@@ -50,10 +51,6 @@ public class AddCourse extends AppCompatActivity {
         AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.addCourseName);
         actv.setAdapter(adapter);
 
-        Button switchActBtn = (Button) findViewById(R.id.addCourse);
-
-        switchActBtn.setOnClickListener(view -> addCourse());
-
         Button addCourseBtn = (Button) findViewById(R.id.addCourse);
         TextView addCourseName = findViewById(R.id.addCourseName);
         TextView addCredit = findViewById(R.id.addCourseCredits);
@@ -75,11 +72,6 @@ public class AddCourse extends AppCompatActivity {
                 x[1] = addCredit.getText().toString();
 
                 classNameAndCredit.put(addTerm.getText().toString(), x);
-
-                for (Map.Entry<String, String[]> entry : classNameAndCredit.entrySet()) {
-                    firstSem.setText(entry.getKey());
-                    firstClass.setText(entry.getValue()[0] + "      " + entry.getValue()[1]);
-                }
             }
         });
     }
