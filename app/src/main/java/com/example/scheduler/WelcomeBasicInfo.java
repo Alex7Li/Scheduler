@@ -39,7 +39,7 @@ public class WelcomeBasicInfo extends AppCompatActivity {
     }
 
     public void openActivity2() {
-        Intent intent = new Intent(WelcomeBasicInfo.this, MainActivity.class);
+        Intent intent = new Intent(WelcomeBasicInfo.this, AddCourse.class);
         startActivity(intent);
     }
 

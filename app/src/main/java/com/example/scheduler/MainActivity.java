@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AccountAccessor accountAccessor = new AccountAccessor("john");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,23 +42,47 @@ public class MainActivity extends AppCompatActivity {
 
         //set text to table layout
         TextView[] termsAU1toSP4 = new TextView[8];
+        termsAU1toSP4[0] = findViewById(R.id.AU1);
+        termsAU1toSP4[1] = findViewById(R.id.SP1);
+        termsAU1toSP4[2] = findViewById(R.id.AU2);
+        termsAU1toSP4[3] = findViewById(R.id.SP2);
+        termsAU1toSP4[4] = findViewById(R.id.AU3);
+        termsAU1toSP4[5] = findViewById(R.id.SP3);
+        termsAU1toSP4[6] = findViewById(R.id.AU4);
+        termsAU1toSP4[7] = findViewById(R.id.SP4);
+
+
         TextView[] classNamesAndCredit = new TextView[8];
-
-        Map<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
-
-        int i = 0;
-        for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
-            String setText = termsAU1toSP4[i].getText().toString();
-            termsAU1toSP4[i].setText(setText + "start year" + (i % 2) );
-            for (String courseTaken : entry.getValue()) {
-                classNamesAndCredit[i].append(courseTaken + "      " + "Credit");
-                //idk if this append string to next line
-            }
-            i++;
-        }
+        classNamesAndCredit[0] = findViewById(R.id.AUclass1);
+        classNamesAndCredit[1] = findViewById(R.id.SPclass1);
+        classNamesAndCredit[2] = findViewById(R.id.AUclass2);
+        classNamesAndCredit[3] = findViewById(R.id.SPclass2);
+        classNamesAndCredit[4] = findViewById(R.id.AUclass3);
+        classNamesAndCredit[5] = findViewById(R.id.SPclass3);
+        classNamesAndCredit[6] = findViewById(R.id.AUclass4);
+        classNamesAndCredit[7] = findViewById(R.id.SPclass4);
 
 
 
+
+//        AccountAccessor accountAccessor = new AccountAccessor("john");
+//        Map<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
+//
+//        int i = 0;
+//        int numStartYear = 18;
+//        for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
+//            Stri
+//            +ng setText = termsAU1toSP4[i].getText().toString();
+//            numStartYear += (i % 2);
+//            termsAU1toSP4[i].setText(setText + numStartYear ); //input method to get start year later
+//            for (String courseTaken : entry.getValue()) {
+//                if (!classNamesAndCredit[i].getText().toString().contains(courseTaken)) {
+//                    classNamesAndCredit[i].append(courseTaken + "      " + "Credit"); //ADD CREDIT LATER
+//                }
+//                //idk if this append string to next line
+//            }
+//            i++;
+//        }
     }
 
     /*

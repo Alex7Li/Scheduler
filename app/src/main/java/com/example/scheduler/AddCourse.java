@@ -1,5 +1,6 @@
 package com.example.scheduler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -170,14 +171,20 @@ public class AddCourse extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addCourseToDB();
-                String[] x = new String[2];
-                x[0] = addCourseName.getText().toString(); //CSE 2221
-                x[1] = addCredit.getText().toString();     //4
-                String termYear = addTerm.getText().toString(); //AU18
+                openActivity1();
+//                String[] x = new String[2];
+//                x[0] = addCourseName.getText().toString(); //CSE 2221
+//                x[1] = addCredit.getText().toString();     //4
+//                String termYear = addTerm.getText().toString(); //AU18
             }
         });
         //CLEAR TEXTS FIELD
         //db.child[by name userYear[tableYear-1]].add(courseName);
+    }
+
+    public void openActivity1() {
+        Intent intent = new Intent(AddCourse.this, MainActivity.class);
+        startActivity(intent);
     }
 
     private OnClickListener onClick1() {
