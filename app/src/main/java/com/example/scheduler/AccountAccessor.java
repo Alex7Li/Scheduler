@@ -22,6 +22,16 @@ public class AccountAccessor {
     /*
      * Constructor for account with {String} accountName
      */
+    AccountAccessor(String accountName) {
+        db = FirebaseDatabase.getInstance().getReference();
+        this.accountName = accountName;
+        updateCourseList();
+
+    }
+    /*
+     * Not good constructor for when in mainactivity because
+     * race conditions
+     */
     AccountAccessor(String accountName, MainActivity ma) {
         db = FirebaseDatabase.getInstance().getReference();
         this.ma = ma;

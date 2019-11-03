@@ -22,6 +22,8 @@ import java.util.List;
 public class AddCourse extends AppCompatActivity {
     private static final String TAG = AddCourse.class.getName();
     CourseAccessor da;
+    AccountAccessor aa;
+
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
     private LinearLayout mLayout1;
@@ -102,6 +104,8 @@ public class AddCourse extends AppCompatActivity {
             prereqs.add(andCourses);
         }
         da.addCourse(new Course(courseNum, informalName, creditHours, prereqs));
+        String term = ((TextView)findViewById(R.id.courseTerm)).getText().toString();
+        aa.addCourseToTerm(courseNum, term);
     }
 
 
@@ -117,6 +121,10 @@ public class AddCourse extends AppCompatActivity {
                 (this, android.R.layout.select_dialog_item, fruits);
         AutoCompleteTextView addCourseName = findViewById(R.id.addCourseName);
         addCourseName.setAdapter(adapter);
+
+        //TODO update account name
+        String accountName = "john";
+        aa = new AccountAccessor(accountName);
 
         Button addCourseBtn = findViewById(R.id.addCourse);
         TextView addCredit = findViewById(R.id.addCourseCredits);
