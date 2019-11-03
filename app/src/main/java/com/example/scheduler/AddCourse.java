@@ -60,6 +60,7 @@ public class AddCourse extends AppCompatActivity {
         //ArrayList<String> userYear = ;
 
 
+
          addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +70,11 @@ public class AddCourse extends AppCompatActivity {
                 x[1] = addCredit.getText().toString();     //4
                 String termYear = addTerm.getText().toString(); //AU18
 
+
+
+                if (termYear.contains("AU")) {
+
+                }
 
             }
         });
