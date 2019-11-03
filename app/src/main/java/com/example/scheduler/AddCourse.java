@@ -165,10 +165,9 @@ public class AddCourse extends AppCompatActivity {
                 } else {
                     tableYear = 2 * (courseYear - startYear);
                 }
+
+                //pass a course to accountaccessor
                 //CLEAR TEXTS FIELD
-
-
-
                 //db.child[userYear[tableYear-1]].add(courseName);
             }
         });

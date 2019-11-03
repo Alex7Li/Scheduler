@@ -36,7 +36,7 @@ public class AccountAccessor {
     /*
      * Return {List<Course>} this.accountCourses
      */
-    public Map<String, List<String>> getAccountCourses(){
+    public TreeMap<String, List<String>> getAccountCourses(){
         return this.termsAndRelatedCourses;
     }
 

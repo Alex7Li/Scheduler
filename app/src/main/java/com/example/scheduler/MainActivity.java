@@ -14,21 +14,27 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference db;
     private Button switchActBtn;
-    private FloatingActionButton john;
+    private FloatingActionButton addCourseFloatBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AccountAccessor accountAccessor = new AccountAccessor("john");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        john = findViewById(R.id.toJohnAct);
+        addCourseFloatBtn = findViewById(R.id.toJohnAct);
 
-        john.setOnClickListener(new View.OnClickListener() {
+        addCourseFloatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openActivity2();
@@ -39,14 +45,20 @@ public class MainActivity extends AppCompatActivity {
         TextView[] termsAU1toSP4 = new TextView[8];
         TextView[] classNamesAndCredit = new TextView[8];
 
-//        for (int i = 0; i < accoutCoursesChild; i++) {
-//            child course = accountCourses[i];
-//            termsAU1toSP4[i].setText(course.year);//year child); accoutAU1.YEAR
-//            for (int j = 0; j < courseChild; i++) {
-//                classNamesAndCredit[i].setText();
-//                //class name child + credit number AU1.class[j].classname and credit number
-//              }
-//        }
+        TreeMap<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
+
+        int i = 0;
+        for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
+            String setText = termsAU1toSP4[i].getText().toString();
+            termsAU1toSP4[i].setText(setText + "start year" + (i % 2) );
+            for (String courseTaken : entry.getValue()) {
+                classNamesAndCredit[i].append(courseTaken + "      " + "Credit");
+                //idk if this append string to next line
+            }
+            i++;
+        }
+
+
 
     }
 
