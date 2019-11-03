@@ -6,7 +6,7 @@ import java.util.ListIterator;
 public class ScheduleAlgorithm {
     List<Course> courses;
 
-    public List<List<Course>> findSchedule(List<Course> needed, List<Course> taken) {
+    public List<List<String>> findSchedule(List<Course> needed, List<Course> taken) {
 
         return null;
     }
