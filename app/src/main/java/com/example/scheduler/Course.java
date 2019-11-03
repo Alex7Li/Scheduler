@@ -14,6 +14,10 @@ public class Course {
     // in prereqs.
     private List<List<String>> prereqs;
 
+    /*
+     * Single-argument constructor for Course with course number
+     * Warning: Sets every other parameter to default values
+     */
     Course(String courseNum) {
         this.courseNum = courseNum;
         this.creditHours = 0;
@@ -21,6 +25,9 @@ public class Course {
         this.prereqs = new ArrayList<>();
     }
 
+    /*
+     * No-argument constructor for Course
+     */
     Course(){
         this.courseNum = "";
         this.creditHours = 0;
@@ -28,6 +35,9 @@ public class Course {
         this.prereqs = new ArrayList<>();
     }
 
+    /*
+     * Constructor for Course with all fields as arguments
+     */
     Course(String courseNum, String informalName, int creditHours, List<List<String>> prereqs){
         this.courseNum = courseNum;
         this.informalName = informalName;
@@ -36,30 +46,51 @@ public class Course {
     }
 
 
+    /*
+     * Returns {String} this.courseNum
+     */
     public String getCourseNum() {
         return this.courseNum;
     }
 
+    /*
+     * Returns {int} this.creditHours
+     */
     public int getcreditHours() {
         return this.creditHours;
     }
 
+    /*
+     * Returns {String} this.informalName
+     */
     public String getinformalName() {
         return this.informalName;
     }
 
+    /*
+     * Returns {List<List<String>>} prereqs
+     */
     public List<List<String>> getPrereqs() {
         return this.prereqs;
     }
 
+    /*
+     * Sets {String} this.courseNum equal to courseNum
+     */
     public void setCourseNum(String courseNum) {
         this.courseNum = courseNum;
     }
 
+    /*
+     * Sets {int} this.creditHours equal to crhrs
+     */
     public void setCreditHours(int crhrs) {
         this.creditHours = crhrs;
     }
 
+    /*
+     * Sets {String} this.informalName equal to infName
+     */
     public void setInformalName(String infName) {
         this.informalName = infName;
     }

@@ -6,10 +6,14 @@
     <string name="Test">test</string>
     <string name="CourseNameHint">ex. CSE 2221</string>
     <string name="CourseTitleHint">ex. Software I</string>
-    <string name="CourseCreditHint">ex. 4</string>
+    <string name="CourseCreditHint">ex. 4 (Credit Hours)</string>
     <string name="CoursePrereqsHint">we will do this EVENTUALLY</string>
     <string name="AddCourseLabel">add course</string>
-    <string name="CourseTermHint">ex. AU19</string>
+    <string name="CourseTermHint">ex. AU 19</string>
+
+    <string name="WelcomeInfo">Welcome! Please enter some basic info</string>
+    <string name="StartingTermHint">starting term, ex. AU 18</string>
+    <string name="StartLabel">Lets get started!</string>
 
     <string name="Autumn">AU</string>
     <string name="Spring">SP</string>
@@ -19,6 +23,7 @@
 
     <string name="AUCredit">AU Credit</string>
     <string name="SPCredit">SP Credit</string>
+    <string name="title_activity_welcome_basic_info">WelcomeBasicInfo</string>
 
 </resources>
 

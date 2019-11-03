@@ -41,6 +41,9 @@ public class DatabaseAccessor {
         return null;
     }
 
+    /*
+     * Returns a {List<Course>} courseList populated with courses from this.db.child("Courses")
+     */
     protected List<Course> updateCourseList() {
         updated = false;
         DatabaseReference courseRef = db.child("Courses");
@@ -49,7 +52,6 @@ public class DatabaseAccessor {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Get map of users in datasnapshot
                 getListOfCoursesFromDatabase(dataSnapshot);
-                updated = true;
             }
 
             @Override
@@ -59,17 +61,15 @@ public class DatabaseAccessor {
             }
         };
         courseRef.addListenerForSingleValueEvent(dataReader);
-        // wait till the database is updated
-//        while(!updated){
-//            try {
-//                Thread.sleep(100);
-//            } catch(InterruptedException ignored) {
-//            }
-//        }
+
         return courses;
     }
 
 
+    /*
+     * For use in getCourseList
+     * Populates this.courses with courses from db
+     */
     protected void getListOfCoursesFromDatabase(DataSnapshot dataSnapshot) {
         courses = new ArrayList<>();
         for(DataSnapshot ds : dataSnapshot.getChildren()){

@@ -20,7 +20,9 @@ public class AddCourse extends AppCompatActivity {
     DatabaseAccessor da;
     String[] fruits = {"CSE 2221", "CSE 1223", "CSE 2321", "CSE 2231", "CSE 2421"};
 
-    // get the valid tags for a course
+    /*
+     * Returns a {List<String>} containing all courseIDs in {DatabaseAccessor} d
+     */
     protected List<String> validTags() {
         DatabaseAccessor d = new DatabaseAccessor();
         List<String> courseIDs = new ArrayList<>();
@@ -39,6 +41,9 @@ public class AddCourse extends AppCompatActivity {
         preReqStr.get(1).add("CSE 1122");
         return preReqStr;
     }
+    /*
+     * Function to add course from {TextView} findViewById to new {DatabaseAccessor}
+     */
     protected void addCourseToDB() {
         String courseNum = ((TextView) findViewById(R.id.addCourseTitle)).getText().toString();
         int creditHours;
