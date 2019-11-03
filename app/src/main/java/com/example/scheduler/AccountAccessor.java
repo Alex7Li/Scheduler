@@ -7,14 +7,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class AccountAccessor {
     private DatabaseReference db;
-    private TreeMap<String, List<String>> termsAndRelatedCourses;
+    private TreeMap<String, List<String>> coursesByTerm;
     private String accountName;
 
     /*
@@ -37,7 +37,7 @@ public class AccountAccessor {
      * Return {List<Course>} this.accountCourses
      */
     public Map<String, List<String>> getAccountCourses(){
-        return this.termsAndRelatedCourses;
+        return this.coursesByTerm;
     }
 
     /*
@@ -70,22 +70,30 @@ public class AccountAccessor {
             }
         };
         courseRef.addListenerForSingleValueEvent(dataReader);
-
-        return termsAndRelatedCourses;
+        return coursesByTerm;
     }
 
     /*
      * For use in getCourseList
-     * Populates {List<List<String>>} this.termsAndRelatedCourses with {List<String>} terms from db
+     * Populates {List<List<String>>} this.coursesByTerm with {List<String>} terms from db
      */
     private void getListOfTermsFromDatabase(DataSnapshot dataSnapshot) {
-        this.termsAndRelatedCourses = new TreeMap<>();
+        this.coursesByTerm = new TreeMap<>(termComparator);
         for(DataSnapshot ds : dataSnapshot.getChildren()){
-            HashMap.Entry<String, List<String>> termAndRelatedCourses = ds.getValue(TreeMap.Entry.class);
-
-            this.termsAndRelatedCourses.put(termAndRelatedCourses.getKey(), termAndRelatedCourses.getValue());
+            TreeMap<String, String> termCourses = ds.getValue(TreeMap.class);
+            List<String> courses = new ArrayList<String>();
+            courses.addAll(termCourses.values());
+            this.coursesByTerm.put(ds.getKey(), courses);
         }
     }
+
+    private static Comparator<String> termComparator = (o1, o2) -> {
+        if(o1.substring(2,4).equals(o2.substring(2,4))){
+            return o1.substring(0,2).compareTo(o2.substring(0,2));
+        }else{
+            return o1.substring(2,4).compareTo(o2.substring(2,4));
+        }
+    };
 
     /*
      * For use in getCourseList
