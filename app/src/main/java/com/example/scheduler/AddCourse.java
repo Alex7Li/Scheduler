@@ -2,15 +2,14 @@ package com.example.scheduler;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.EditText;
-import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -82,7 +81,7 @@ public class AddCourse extends AppCompatActivity {
         }
         String informalName = ((TextView) findViewById(R.id.addCourseTitle)).getText().toString();
         List<List<String>> prereqs = new ArrayList<>();
-        // populate prereqs... for now we use made up data
+
         List<List<String>> prereqStrings = sampleData();
         for (List<String> andList : prereqStrings) {
             List<String> andCourses = new ArrayList<>();
@@ -98,7 +97,7 @@ public class AddCourse extends AppCompatActivity {
             prereqs.add(andCourses);
         }
         CourseAccessor.addCourse(new Course(courseNum, informalName, creditHours, prereqs));
-        String term = ((TextView) findViewById(R.id.courseTerm)).getText().toString();
+        String term = ((TextView) findViewById(R.id.courseTerm)).getText().toString().toUpperCase();
         aa.addCourseToTerm(courseNum, term);
     }
 

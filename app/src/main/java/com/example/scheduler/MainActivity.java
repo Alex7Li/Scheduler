@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private Button switchActBtn;
     private FloatingActionButton addCourseFloatBtn;
     AccountAccessor accountAccessor;
 
@@ -49,9 +49,11 @@ public class MainActivity extends AppCompatActivity {
         termsAU1toSP4[6] = findViewById(R.id.AU4);
         termsAU1toSP4[7] = findViewById(R.id.SP4);
 
+//        RecyclerView rv = findViewById(R.id.AUclass1);
+//        rv.add("Hello");
+
 
         TextView[] classNamesAndCredit = new TextView[8];
-        classNamesAndCredit[0] = findViewById(R.id.AUclass1);
         classNamesAndCredit[1] = findViewById(R.id.SPclass1);
         classNamesAndCredit[2] = findViewById(R.id.AUclass2);
         classNamesAndCredit[3] = findViewById(R.id.SPclass2);
