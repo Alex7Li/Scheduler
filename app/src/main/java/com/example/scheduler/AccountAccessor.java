@@ -148,10 +148,19 @@ public class AccountAccessor {
             if(ds.getValue().equals("")){
                 continue;
             }
-            HashMap<String, String> termCourses = ds.getValue(HashMap.class);
-            List<String> courses = new ArrayList<String>();
-            courses.addAll(termCourses.values());
-            this.coursesByTerm.put(ds.getKey(), courses);
+            System.out.println(ds.getValue());
+            if(ds.getValue() instanceof String){
+                List<String> courseList = new ArrayList<>();
+                courseList.add(ds.getValue().toString());
+                this.coursesByTerm.put(ds.getKey(), courseList);
+            }else if(ds.getValue() instanceof HashMap) {
+                HashMap termCourses = (HashMap)ds.getValue();
+                List<String> courses = new ArrayList<String>();
+                courses.addAll(termCourses.values());
+                this.coursesByTerm.put(ds.getKey(), courses);
+            }else{
+                System.out.println(ds.getValue());
+            }
         }
     }
 

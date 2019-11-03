@@ -79,14 +79,14 @@ public class AddCourse extends AppCompatActivity {
      * Function to add course from {TextView} findViewById to new {CourseAccessor}
      */
     protected void addCourseToDB() {
-        String courseNum = ((TextView) findViewById(R.id.addCourseTitle)).getText().toString();
+        String courseNum = ((TextView) findViewById(R.id.addCourseName)).getText().toString();
         int creditHours;
         try {
             creditHours = Integer.parseInt(((TextView) findViewById(R.id.addCourseCredits)).getText().toString());
         } catch (NumberFormatException e) {
             creditHours = 0;
         }
-        String informalName = ((TextView) findViewById(R.id.addCourseName)).getText().toString();
+        String informalName = ((TextView) findViewById(R.id.addCourseTitle)).getText().toString();
         List<List<String>> prereqs = new ArrayList<>();
         // populate prereqs... for now we use made up data
         List<List<String>> prereqStrings = sampleData();
