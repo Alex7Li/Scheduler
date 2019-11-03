@@ -12,12 +12,17 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
 
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
+import static com.example.scheduler.CourseAccessor.addCourse;
 import static com.example.scheduler.CourseAccessor.courses;
 
 
@@ -113,12 +118,28 @@ public class AddCourse extends AppCompatActivity {
                 (this, android.R.layout.select_dialog_item, validTags());
         AutoCompleteTextView addCourseName = findViewById(R.id.addCourseName);
         addCourseName.setAdapter(adapter);
+
         Bundle b = getIntent().getExtras();
         final String name = b == null ? "john" : b.getString("name");
 
         aa = new AccountAccessor(name);
 
         Button addCourseBtn = findViewById(R.id.addCourse);
+
+        AutoCompleteTextView courseFill = (AutoCompleteTextView) findViewById(R.id.addCourseName);
+
+        addCourseName.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selected = (String) parent.getItemAtPosition(position);
+                System.out.println(selected);
+                Course c = CourseAccessor.getCourseByNumber(selected);
+                TextView addCourseTitle = findViewById(R.id.addCourseTitle);
+                TextView addCourseCredits = findViewById(R.id.addCourseCredits);
+                addCourseTitle.setText(c.getinformalName());
+                addCourseCredits.setText(c.getcreditHours()+"");
+            }
+        });
 
         String[] userYear = new String[8];
         userYear[0] = "AU1";

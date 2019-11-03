@@ -33,6 +33,8 @@ class CourseAccessor {
     */
     static Course getCourseByNumber(String courseNum) {
         for (Course c : courses) {
+            System.out.println(c.getCourseNum());
+            System.out.println(courseNum);
             if (c.getCourseNum().equals(courseNum)) {
                 return c;
             }
