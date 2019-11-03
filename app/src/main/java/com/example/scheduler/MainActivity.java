@@ -62,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
         classNamesAndCredit[6] = findViewById(R.id.AUclass4);
         classNamesAndCredit[7] = findViewById(R.id.SPclass4);
 
-
-
+        classNamesAndCredit[0].append("Credit");
+        classNamesAndCredit[0].append("\n");
+        classNamesAndCredit[0].append("Credit");
+        classNamesAndCredit[0].append("\n");
 
 //        AccountAccessor accountAccessor = new AccountAccessor("john");
 //        Map<String, List<String>> coursesByTerm = accountAccessor.getAccountCourses();
@@ -71,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
 //        int i = 0;
 //        int numStartYear = 18;
 //        for(Map.Entry<String, List<String>> entry : coursesByTerm.entrySet()) {
-//            Stri
-//            +ng setText = termsAU1toSP4[i].getText().toString();
+//            String setText = termsAU1toSP4[i].getText().toString();
 //            numStartYear += (i % 2);
 //            termsAU1toSP4[i].setText(setText + numStartYear ); //input method to get start year later
 //            for (String courseTaken : entry.getValue()) {
 //                if (!classNamesAndCredit[i].getText().toString().contains(courseTaken)) {
 //                    classNamesAndCredit[i].append(courseTaken + "      " + "Credit"); //ADD CREDIT LATER
+//                    classNamesAndCredit[i].append("\n"); //ADD CREDIT LATER
 //                }
 //                //idk if this append string to next line
 //            }
