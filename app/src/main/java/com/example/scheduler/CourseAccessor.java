@@ -28,6 +28,8 @@ class CourseAccessor {
         updateCourseList();
     }
 
+
+
     /*
        Get a course by course number, if it's not in the database, return null.
     */

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 //            for (int j = 0; j < courseChild; i++) {
 //                classNamesAndCredit[i].setText();
 //                //class name child + credit number AU1.class[j].classname and credit number
-//        }
+//              }
 //        }
 
     }
